@@ -25,11 +25,21 @@ Create new client of DaData.
 
 Api and secret keys see on profile page (https://dadata.ru/profile/).
 */
-func NewDaData(apiKey, sercretKey string) *DaData {
+func NewDaData(apiKey, secretKey string) *DaData {
+	return NewDaDataCustomClient(apiKey, secretKey, &http.Client{})
+}
+
+/*
+Create new custom client of DaData. By example, this option should be used to Google AppEngine:
+    ctx := appengine.NewContext(request)
+    appEngineClient := urlfetch.Client(ctx)
+    daData:= NewDaDataCustomClient(apiKey, secretKey, client)
+*/
+func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *DaData {
 	return &DaData{
 		ApiKey:     apiKey,
-		SecretKey:  sercretKey,
-		httpClient: &http.Client{},
+		SecretKey:  secretKey,
+		httpClient: httpClient,
 	}
 }
 
