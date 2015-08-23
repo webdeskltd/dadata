@@ -1,5 +1,5 @@
 /*
-Unofficial client for DaData.ru (https://dadata.ru/).
+Golang client library for DaData.ru (https://dadata.ru/).
 
 While implemented only cleaning (https://dadata.ru/api/clean/).
 */
