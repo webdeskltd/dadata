@@ -33,7 +33,7 @@ func NewDaData(apiKey, secretKey string) *DaData {
 Create new custom client of DaData. By example, this option should be used to Google AppEngine:
     ctx := appengine.NewContext(request)
     appEngineClient := urlfetch.Client(ctx)
-    daData:= NewDaDataCustomClient(apiKey, secretKey, client)
+    daData:= NewDaDataCustomClient(apiKey, secretKey, appEngineClient)
 */
 func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *DaData {
 	return &DaData{
