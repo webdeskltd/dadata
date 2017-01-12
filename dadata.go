@@ -61,12 +61,15 @@ func (daData *DaData) sendRequest(lastUrlPart string, source interface{}, result
 	request.Header.Add("X-Secret", daData.SecretKey)
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("Accept", "application/json")
+	request.Header.Set("Connection", "close")
 
 	response, httpErr := daData.httpClient.Do(request)
 	if nil != httpErr {
 		fmt.Printf("httpErr: %v", httpErr)
 		return httpErr
 	}
+
+	defer response.Body.Close()
 
 	if http.StatusOK != response.StatusCode {
 		return fmt.Errorf("Request error %v", response.Status)
