@@ -1,7 +1,7 @@
 package dadata
 
 func (daData *DaData) sendCleanRequest(lastUrlPart string, source, result interface{}) error {
-	return daData.sendRequest("clean/"+lastUrlPart, source, result)
+	return daData.sendRequest("clean/" + lastUrlPart, source, result)
 }
 
 type Address struct {
@@ -195,6 +195,25 @@ func (daData *DaData) CleanVehicles(sourceVehicles ...string) ([]Vehicle, error)
 	var vehicles []Vehicle
 	if sendErr := daData.sendCleanRequest("vehicle", &sourceVehicles, &vehicles); nil == sendErr {
 		return vehicles, nil
+	} else {
+		return nil, sendErr
+	}
+}
+
+type Passport struct {
+	Source      string `json:"source"` // Исходная серия и номер одной строкой
+	Series      string `json:"series"` // Серия
+	Number      string `json:"number"` // Номер
+	QualityCode int    `json:"qc"`     // Код проверки
+}
+
+/*
+Call https://dadata.ru/api/v2/clean/passport
+*/
+func (daData *DaData) CleanPassports(sourcePassports ...string) ([]Passport, error) {
+	var passports []Passport
+	if sendErr := daData.sendCleanRequest("passport", &sourcePassports, &passports); nil == sendErr {
+		return passports, nil
 	} else {
 		return nil, sendErr
 	}

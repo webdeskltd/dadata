@@ -150,13 +150,39 @@ func TestCleanVehicles(t *testing.T) {
 	}
 
 	if len(sourceVehicles) != len(vehicles) {
-		t.Errorf(`CleanVehicles return %d birthdates, but expected %d`, len(vehicles), len(sourceVehicles))
+		t.Errorf(`CleanVehicles return %d vehicles, but expected %d`, len(vehicles), len(sourceVehicles))
 	}
 
 	emptyVehicle := dadata.Vehicle{}
 	for index, vehicle := range vehicles {
 		if vehicle == emptyVehicle {
 			t.Errorf(`CleanVehicles return empty vehicle %v for "%s"`, vehicle, sourceVehicles[index])
+		}
+	}
+}
+
+func TestCleanPassports(t *testing.T) {
+	var passportsCleaner dadata.PassportCleaner = newCleaner()
+
+	sourcePassports := []string{
+		"4519 235347",
+		"4509 235857",
+	}
+
+	passports, err := passportsCleaner.CleanPassports(sourcePassports...)
+
+	if nil != err {
+		t.Errorf(`CleanPassports return error: %v`, err)
+	}
+
+	if len(sourcePassports) != len(passports) {
+		t.Errorf(`CleanPassports return %d passports, but expected %d`, len(passports), len(sourcePassports))
+	}
+
+	emptyPassport := dadata.Passport{}
+	for index, passport := range passports {
+		if passport == emptyPassport {
+			t.Errorf(`CleanPassports return empty passport %v for "%s"`, passport, sourcePassports[index])
 		}
 	}
 }
