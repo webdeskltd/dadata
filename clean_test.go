@@ -134,3 +134,29 @@ func TestCleanBirthdates(t *testing.T) {
 		}
 	}
 }
+
+func TestCleanVehicles(t *testing.T) {
+	var vehiclesCleaner dadata.VehicleCleaner = newCleaner()
+
+	sourceVehicles := []string{
+		"форд фокус",
+		"тойота королла",
+	}
+
+	vehicles, err := vehiclesCleaner.CleanVehicles(sourceVehicles...)
+
+	if nil != err {
+		t.Errorf(`CleanVehicles return error: %v`, err)
+	}
+
+	if len(sourceVehicles) != len(vehicles) {
+		t.Errorf(`CleanVehicles return %d birthdates, but expected %d`, len(vehicles), len(sourceVehicles))
+	}
+
+	emptyVehicle := dadata.Vehicle{}
+	for index, vehicle := range vehicles {
+		if vehicle == emptyVehicle {
+			t.Errorf(`CleanVehicles return empty vehicle %v for "%s"`, vehicle, sourceVehicles[index])
+		}
+	}
+}
