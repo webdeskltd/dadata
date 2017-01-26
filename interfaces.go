@@ -20,6 +20,14 @@ type BirthdatesCleaner interface {
 	CleanBirthdates(birthdates ...string) ([]Birthdate, error)
 }
 
+type VehicleCleaner interface {
+	CleanVehicles(vehicles ...string) ([]Vehicle, error)
+}
+
+type PassportCleaner interface {
+	CleanPassports(passports ...string) ([]Passport, error)
+}
+
 /*
 Public interface. Stubs it for tests.
 */
@@ -29,4 +37,6 @@ type Cleaner interface {
 	NamesCleaner
 	EmailsCleaner
 	BirthdatesCleaner
+	VehicleCleaner
+	PassportCleaner
 }
