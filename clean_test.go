@@ -1,13 +1,13 @@
-package dadata_test
+package dadata
 
 import (
 	"testing"
 
-	dadata "."
+	"github.com/go-test/deep"
 )
 
 func TestCleanAddresses(t *testing.T) {
-	var addressesCleaner dadata.AddressesCleaner = newCleaner()
+	var addressesCleaner AddressesCleaner = newCleaner()
 
 	sourceAddresses := []string{
 		"ул.Правды 26",
@@ -17,23 +17,23 @@ func TestCleanAddresses(t *testing.T) {
 	addresses, err := addressesCleaner.CleanAddresses(sourceAddresses...)
 
 	if err != nil {
-		t.Errorf("ClaenAddresses return error: %v", err)
+		t.Errorf("CleanAddresses return error: %v", err)
 	}
 
 	if len(addresses) != len(sourceAddresses) {
-		t.Errorf("ClaenAddresses return %d addresses, but expect %d", len(addresses), len(sourceAddresses))
+		t.Errorf("CleanAddresses return %d addresses, but expect %d", len(addresses), len(sourceAddresses))
 	}
 
-	emptyAddress := dadata.Address{}
+	emptyAddress := Address{}
 	for index, address := range addresses {
-		if address == emptyAddress {
-			t.Errorf(`ClaenAddresses return empty address for "%s"`, sourceAddresses[index])
+		if len(deep.Equal(address, emptyAddress)) == 0 {
+			t.Errorf(`CleanAddresses return empty address for "%s"`, sourceAddresses[index])
 		}
 	}
 }
 
 func TestCleanPhones(t *testing.T) {
-	var phonesCleaner dadata.PhonesCleaner = newCleaner()
+	var phonesCleaner PhonesCleaner = newCleaner()
 
 	sourcePhones := []string{
 		"+7 499 123 45 67",
@@ -50,7 +50,7 @@ func TestCleanPhones(t *testing.T) {
 		t.Errorf(`CleanPhones return %d phones, but expect %d`, len(phones), len(sourcePhones))
 	}
 
-	emptyPhone := dadata.Phone{}
+	emptyPhone := Phone{}
 	for index, phone := range phones {
 		if phone == emptyPhone {
 			t.Errorf(`CleanPhones return empty phone %v for "%s"`, phone, sourcePhones[index])
@@ -59,7 +59,7 @@ func TestCleanPhones(t *testing.T) {
 }
 
 func TestCleanNames(t *testing.T) {
-	var namesCleaner dadata.NamesCleaner = newCleaner()
+	var namesCleaner NamesCleaner = newCleaner()
 
 	sourceNames := []string{
 		"Иван Алексеев",
@@ -76,7 +76,7 @@ func TestCleanNames(t *testing.T) {
 		t.Errorf(`CleanNames return %d names, but expect %d`, len(names), len(sourceNames))
 	}
 
-	emptyName := dadata.Name{}
+	emptyName := Name{}
 	for index, name := range names {
 		if name == emptyName {
 			t.Errorf(`CleanPones return empty name %v for "%s"`, name, sourceNames[index])
@@ -85,7 +85,7 @@ func TestCleanNames(t *testing.T) {
 }
 
 func TestCleanEmails(t *testing.T) {
-	var emailsCleaner dadata.EmailsCleaner = newCleaner()
+	var emailsCleaner EmailsCleaner = newCleaner()
 	sourceEmails := []string{
 		"test@test/ru",
 		"test@test.ry",
@@ -101,7 +101,7 @@ func TestCleanEmails(t *testing.T) {
 		t.Errorf(`CleanEmails return %d emails, but expect %d`, len(emails), len(sourceEmails))
 	}
 
-	emptyEmail := dadata.Email{}
+	emptyEmail := Email{}
 	for index, email := range emails {
 		if email == emptyEmail {
 			t.Errorf(`CleanEmails return empty email %v for "%s"`, email, sourceEmails[index])
@@ -110,7 +110,7 @@ func TestCleanEmails(t *testing.T) {
 }
 
 func TestCleanBirthdates(t *testing.T) {
-	var birthdatesCleaner dadata.BirthdatesCleaner = newCleaner()
+	var birthdatesCleaner BirthdatesCleaner = newCleaner()
 
 	sourceBirthdates := []string{
 		"24/3/12",
@@ -127,7 +127,7 @@ func TestCleanBirthdates(t *testing.T) {
 		t.Errorf(`CleanBirthdates return %d birthdates, but expected %d`, len(birthdates), len(sourceBirthdates))
 	}
 
-	emptyBirthdate := dadata.Birthdate{}
+	emptyBirthdate := Birthdate{}
 	for index, birthdate := range birthdates {
 		if birthdate == emptyBirthdate {
 			t.Errorf(`CleanBirthdates return empty birthdate %v for "%s"`, birthdate, sourceBirthdates[index])
@@ -136,7 +136,7 @@ func TestCleanBirthdates(t *testing.T) {
 }
 
 func TestCleanVehicles(t *testing.T) {
-	var vehiclesCleaner dadata.VehicleCleaner = newCleaner()
+	var vehiclesCleaner VehicleCleaner = newCleaner()
 
 	sourceVehicles := []string{
 		"форд фокус",
@@ -153,7 +153,7 @@ func TestCleanVehicles(t *testing.T) {
 		t.Errorf(`CleanVehicles return %d vehicles, but expected %d`, len(vehicles), len(sourceVehicles))
 	}
 
-	emptyVehicle := dadata.Vehicle{}
+	emptyVehicle := Vehicle{}
 	for index, vehicle := range vehicles {
 		if vehicle == emptyVehicle {
 			t.Errorf(`CleanVehicles return empty vehicle %v for "%s"`, vehicle, sourceVehicles[index])
@@ -162,7 +162,7 @@ func TestCleanVehicles(t *testing.T) {
 }
 
 func TestCleanPassports(t *testing.T) {
-	var passportsCleaner dadata.PassportCleaner = newCleaner()
+	var passportsCleaner PassportCleaner = newCleaner()
 
 	sourcePassports := []string{
 		"4519 235347",
@@ -179,7 +179,7 @@ func TestCleanPassports(t *testing.T) {
 		t.Errorf(`CleanPassports return %d passports, but expected %d`, len(passports), len(sourcePassports))
 	}
 
-	emptyPassport := dadata.Passport{}
+	emptyPassport := Passport{}
 	for index, passport := range passports {
 		if passport == emptyPassport {
 			t.Errorf(`CleanPassports return empty passport %v for "%s"`, passport, sourcePassports[index])

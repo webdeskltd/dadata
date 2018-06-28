@@ -40,3 +40,31 @@ type Cleaner interface {
 	VehicleCleaner
 	PassportCleaner
 }
+
+type AddressSuggester interface {
+	SuggestAddresses(requestParams SuggestRequestParams) ([]ResponseAddress, error)
+}
+
+type NamesSuggester interface {
+	SuggestNames(requestParams SuggestRequestParams) ([]ResponseName, error)
+}
+
+type EmailsSuggester interface {
+	SuggestEmails(requestParams SuggestRequestParams) ([]ResponseEmail, error)
+}
+
+type BanksSuggester interface {
+	SuggestBanks(requestParams SuggestRequestParams) ([]ResponseBank, error)
+}
+
+type PartiesSuggester interface {
+	SuggestParties(requestParams SuggestRequestParams) ([]ResponseParty, error)
+}
+
+type Suggester interface {
+	AddressSuggester
+	BanksSuggester
+	EmailsSuggester
+	NamesSuggester
+	PartiesSuggester
+}
