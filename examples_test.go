@@ -1,8 +1,10 @@
-package dadata
+package dadata_test
 
 import (
 	"fmt"
 	"os"
+
+	. "github.com/mekegi/dadata"
 )
 
 func ExampleDaData_CleanAddresses() {

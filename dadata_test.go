@@ -1,9 +1,11 @@
-package dadata
+package dadata_test
 
 import (
 	"os"
 	"sync"
 	"testing"
+
+	. "github.com/mekegi/dadata"
 )
 
 var (

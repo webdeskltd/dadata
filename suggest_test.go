@@ -1,8 +1,10 @@
-package dadata
+package dadata_test
 
 import (
 	"reflect"
 	"testing"
+
+	. "github.com/mekegi/dadata"
 )
 
 func TestDaData_SuggestAddresses(t *testing.T) {
