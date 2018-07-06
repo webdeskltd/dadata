@@ -1,8 +1,6 @@
-/*
-Golang client library for DaData.ru (https://dadata.ru/).
+// Golang client library for DaData.ru (https://dadata.ru/).
 
-While implemented only cleaning (https://dadata.ru/api/clean/).
-*/
+// Package dadata implemented only cleaning (https://dadata.ru/api/clean/) and suggesting (https://dadata.ru/api/suggest/)
 package dadata
 
 import (
@@ -12,38 +10,34 @@ import (
 	"net/http"
 )
 
-const BASE_URL = "https://dadata.ru/api/v2/"
+const baseURL = "https://dadata.ru/api/v2/"
 
+// DaData client for DaData.ru (https://dadata.ru/)
 type DaData struct {
-	ApiKey     string
-	SecretKey  string
+	apiKey     string
+	secretKey  string
 	httpClient *http.Client
 }
 
-/*
-Create new client of DaData.
-
-Api and secret keys see on profile page (https://dadata.ru/profile/).
-*/
+//NewDaData Create new client of DaData.
+//Api and secret keys see on profile page (https://dadata.ru/profile/).
 func NewDaData(apiKey, secretKey string) *DaData {
 	return NewDaDataCustomClient(apiKey, secretKey, &http.Client{})
 }
 
-/*
-Create new custom client of DaData. By example, this option should be used to Google AppEngine:
-    ctx := appengine.NewContext(request)
-    appEngineClient := urlfetch.Client(ctx)
-    daData:= NewDaDataCustomClient(apiKey, secretKey, appEngineClient)
-*/
+// NewDaDataCustomClient Create new custom client of DaData. By example, this option should be used to Google AppEngine:
+//    ctx := appengine.NewContext(request)
+//    appEngineClient := urlfetch.Client(ctx)
+//    daData:= NewDaDataCustomClient(apiKey, secretKey, appEngineClient)
 func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *DaData {
 	return &DaData{
-		ApiKey:     apiKey,
-		SecretKey:  secretKey,
+		apiKey:     apiKey,
+		secretKey:  secretKey,
 		httpClient: httpClient,
 	}
 }
 
-func (daData *DaData) sendRequest(lastUrlPart string, source interface{}, result interface{}) error {
+func (daData *DaData) sendRequest(lastURLPart string, source interface{}, result interface{}) error {
 	buffer := &bytes.Buffer{}
 
 	if encodeErr := json.NewEncoder(buffer).Encode(source); nil != encodeErr {
@@ -51,14 +45,14 @@ func (daData *DaData) sendRequest(lastUrlPart string, source interface{}, result
 		return encodeErr
 	}
 
-	request, requestErr := http.NewRequest("POST", BASE_URL+lastUrlPart, buffer)
+	request, requestErr := http.NewRequest("POST", baseURL+lastURLPart, buffer)
 	if nil != requestErr {
 		fmt.Printf("requestErr: %v", requestErr)
 		return requestErr
 	}
 
-	request.Header.Add("Authorization", fmt.Sprintf("Token %s", daData.ApiKey))
-	request.Header.Add("X-Secret", daData.SecretKey)
+	request.Header.Add("Authorization", fmt.Sprintf("Token %s", daData.apiKey))
+	request.Header.Add("X-Secret", daData.secretKey)
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("Accept", "application/json")
 	request.Header.Set("Connection", "close")
