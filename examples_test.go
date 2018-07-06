@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	. "github.com/mekegi/dadata"
+	. "github.com/webdeskltd/dadata"
 )
 
 func ExampleDaData_CleanAddresses() {

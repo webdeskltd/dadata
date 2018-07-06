@@ -1,4 +1,4 @@
-go_import_path: github.com/mekegi/dadata
+go_import_path: github.com/webdeskltd/dadata
 language: go
 sudo: false
 

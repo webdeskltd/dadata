@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/mekegi/dadata"
+	. "github.com/webdeskltd/dadata"
 )
 
 func TestDaData_SuggestAddresses(t *testing.T) {

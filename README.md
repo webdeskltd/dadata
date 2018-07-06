@@ -1,12 +1,12 @@
 # Client for DaData.ru 
-[![Build Status](https://travis-ci.org/mekegi/dadata.svg)](https://travis-ci.org/mekegi/dadata)  [![GoDoc](https://godoc.org/github.com/mekegi/dadata?status.png)](http://godoc.org/github.com/mekegi/dadata)
+[![Build Status](https://travis-ci.org/webdeskltd/dadata.svg)](https://travis-ci.org/webdeskltd/dadata)  [![GoDoc](https://godoc.org/github.com/webdeskltd/dadata?status.png)](http://godoc.org/github.com/webdeskltd/dadata)
 
 Implemented [Clean](https://dadata.ru/api/clean/) 
 and [Suggest](https://dadata.ru/api/suggest/) methods
 
 ## Installation
 
-`go get github.com/mekegi/dadata`
+`go get github.com/webdeskltd/dadata`
 
 ## Usage
 ```go
@@ -15,7 +15,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/mekegi/dadata"
+	"github.com/webdeskltd/dadata"
 )
 
 func main() {

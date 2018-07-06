@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	. "github.com/mekegi/dadata"
+	. "github.com/webdeskltd/dadata"
 )
 
 var (
