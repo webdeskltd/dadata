@@ -1,5 +1,6 @@
 package dadata
 
+// Address base struct for datdata.Address
 type Address struct {
 	Source               string `json:"source"`                  // Исходный адрес одной строкой
 	Result               string `json:"result"`                  // Стандартизованный адрес одной строкой
@@ -79,18 +80,21 @@ type Address struct {
 	Metro               []Metro     `json:"metro"`
 }
 
+// ResponseAddress api response for address
 type ResponseAddress struct {
 	Value             string  `json:"value"`
 	UnrestrictedValue string  `json:"unrestricted_value"`
 	Data              Address `json:"data"`
 }
 
+// Metro base struct for dadata.Metro
 type Metro struct {
 	Name     string  `json:"name"`
 	Line     string  `json:"line"`
 	Distance float64 `json:"distance"`
 }
 
+// Phone base struct for dadata.Phone
 type Phone struct {
 	Source              string `json:"source"`       // Исходный телефон одной строкой
 	Type                string `json:"type"`         // Тип телефона
@@ -106,6 +110,7 @@ type Phone struct {
 	QualityCode         int    `json:"qc"`           // Код качества
 }
 
+// Name base struct for dadata.Name
 type Name struct {
 	Source         string `json:"source"`          // Исходное ФИО одной строкой
 	Result         string `json:"result"`          // Стандартизованное ФИО одной строкой
@@ -119,30 +124,35 @@ type Name struct {
 	QualityCode    int    `json:"qc"`              // Код качества
 }
 
+// ResponseName api response for name
 type ResponseName struct {
 	Value             string `json:"value"`
 	UnrestrictedValue string `json:"unrestricted_value"`
 	Data              Name   `json:"data"`
 }
 
+// Email base struct for dadata.Email
 type Email struct {
 	Source      string `json:"source"` // Исходный e-mail
 	Email       string `json:"email"`  // Стандартизованный e-mail
 	QualityCode int    `json:"qc"`     // Код качества
 }
 
+// ResponseEmail api response for email
 type ResponseEmail struct {
 	Value             string `json:"value"`
 	UnrestrictedValue string `json:"unrestricted_value"`
 	Data              Email  `json:"data"`
 }
 
+// Birthdate base struct for dadata.Birthdate
 type Birthdate struct {
 	Source      string `json:"source"`    // Исходная дата
 	Birthdate   string `json:"birthdate"` // Стандартизованная дата
 	QualityCode int    `json:"qc"`        // Код качества
 }
 
+// Vehicle base struct for dadata.Vehicle
 type Vehicle struct {
 	Source      string `json:"source"` // Исходное значение
 	Result      string `json:"result"` // Стандартизованное значение
@@ -151,6 +161,7 @@ type Vehicle struct {
 	QualityCode int    `json:"qc"`     // Код проверки
 }
 
+// Passport base struct for dadata.Passport
 type Passport struct {
 	Source      string `json:"source"` // Исходная серия и номер одной строкой
 	Series      string `json:"series"` // Серия
@@ -158,6 +169,7 @@ type Passport struct {
 	QualityCode int    `json:"qc"`     // Код проверки
 }
 
+// Bank base struct for dadata.Bank
 type Bank struct {
 	Opf                  OrganizationOPF `json:"opf"`
 	Name                 BankName        `json:"name"`
@@ -166,7 +178,7 @@ type Bank struct {
 	Okpo                 string          `json:"okpo"`                  // Код ОКПО
 	CorrespondentAccount string          `json:"correspondent_account"` // Корреспондентский счет в ЦБ РФ
 	RegistrationNumber   string          `json:"registration_number"`   // Регистрационный номер в ЦБ РФ
-	// Go cannot use recurecise types - thats why we need copy paste all fields to Rks
+	// Go cannot use recursive types - thats why we need copy paste all fields to Rks
 	Rkc struct {
 		Opf                  OrganizationOPF   `json:"opf"`
 		Name                 BankName          `json:"name"`
@@ -185,6 +197,7 @@ type Bank struct {
 	State   OrganizationState `json:"state"`
 }
 
+// ResponseBank api response for bank
 type ResponseBank struct {
 	Value             string `json:"value"`
 	UnrestrictedValue string `json:"unrestricted_value"`
@@ -216,7 +229,7 @@ type OrganizationState struct {
 	LiquidationDate  string `json:"liquidation_date"`  // Дата ликвидации
 }
 
-// Party Организация
+// Party base struct for dadata.Party (rus Организация)
 type Party struct {
 	Kpp        string `json:"kpp"`
 	Capital    string `json:"capital"`
@@ -256,6 +269,7 @@ type Party struct {
 	OkvedType   string          `json:"okved_type"`
 }
 
+// ResponseParty api response for party
 type ResponseParty struct {
 	Value             string `json:"value"`
 	UnrestrictedValue string `json:"unrestricted_value"`

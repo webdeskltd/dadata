@@ -1,29 +1,35 @@
 package dadata
 
+// SuggestRequestParams Request struct
 type SuggestRequestParams struct {
-	Query     string `json:"query"`
-	Count     int    `json:"count"`
+	Query     string `json:"query"` // user input for suggestion
+	Count     int    `json:"count"` // ligmit for results
 	Locations struct {
-		CityFiasID string `json:"city_fias_id"`
+		CityFiasID string `json:"city_fias_id"` // search only in this area
 	} `json:"locations"`
 }
 
+// SuggestAddressResponse result slice for address suggestions
 type SuggestAddressResponse struct {
 	Suggestions []ResponseAddress `json:"suggestions"`
 }
 
+// SuggestNameResponse result slice for name suggestions
 type SuggestNameResponse struct {
 	Suggestions []ResponseName `json:"suggestions"`
 }
 
+// SuggestBankResponse result slice for bank suggestions
 type SuggestBankResponse struct {
 	Suggestions []ResponseBank `json:"suggestions"`
 }
 
+// SuggestPartyResponse result slice for party suggestions
 type SuggestPartyResponse struct {
 	Suggestions []ResponseParty `json:"suggestions"`
 }
 
+// SuggestEmailResponse result slice for email suggestions
 type SuggestEmailResponse struct {
 	Suggestions []ResponseEmail `json:"suggestions"`
 }

@@ -37,11 +37,8 @@ func TestNewDaData(t *testing.T) {
 	secretKey := "secretKey"
 	daData := NewDaData(apiKey, secretKey)
 
-	if daData.ApiKey != apiKey {
-		t.Errorf(`Invalid api key. Expect "%s", but got "%s"`, apiKey, daData.ApiKey)
+	if daData == nil {
+		t.Errorf(`NewDaData return nil`)
 	}
 
-	if daData.SecretKey != secretKey {
-		t.Errorf(`Invalid secret key. Expect "%s", but got "%s"`, secretKey, daData.SecretKey)
-	}
 }

@@ -1,89 +1,75 @@
 package dadata
 
-func (daData *DaData) sendCleanRequest(lastUrlPart string, source, result interface{}) error {
-	return daData.sendRequest("clean/"+lastUrlPart, source, result)
+func (daData *DaData) sendCleanRequest(lastURLPart string, source, result interface{}) error {
+	return daData.sendRequest("clean/"+lastURLPart, source, result)
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/address
-*/
+// CleanAddresses clean all provided addresses
+// Call https://dadata.ru/api/v2/clean/address
 func (daData *DaData) CleanAddresses(sourceAddresses ...string) ([]Address, error) {
 	var addresses []Address
-	if sendErr := daData.sendCleanRequest("address", &sourceAddresses, &addresses); nil == sendErr {
-		return addresses, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("address", &sourceAddresses, &addresses); err != nil {
+		return nil, err
 	}
+	return addresses, nil
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/phone
-*/
+// CleanPhones clean all provided phones
+// Call https://dadata.ru/api/v2/clean/phone
 func (daData *DaData) CleanPhones(sourcePhones ...string) ([]Phone, error) {
 	var phones []Phone
-	if sendErr := daData.sendCleanRequest("phone", &sourcePhones, &phones); nil == sendErr {
-		return phones, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("phone", &sourcePhones, &phones); err != nil {
+		return nil, err
 	}
+	return phones, nil
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/name
-*/
+// CleanNames clean all provided names
+// Call https://dadata.ru/api/v2/clean/name
 func (daData *DaData) CleanNames(sourceNames ...string) ([]Name, error) {
 	var names []Name
-	if sendErr := daData.sendCleanRequest("name", &sourceNames, &names); nil == sendErr {
-		return names, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("name", &sourceNames, &names); err != nil {
+		return nil, err
 	}
+	return names, nil
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/email
-*/
+// CleanEmails clean all provided emails
+// Call https://dadata.ru/api/v2/clean/email
 func (daData *DaData) CleanEmails(sourceEmails ...string) ([]Email, error) {
 	var emails []Email
-	if sendErr := daData.sendCleanRequest("email", &sourceEmails, &emails); nil == sendErr {
-		return emails, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("email", &sourceEmails, &emails); err != nil {
+		return nil, err
 	}
+	return emails, nil
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/birthdate
-*/
+// CleanBirthdates clean all provided birthdates
+// Call https://dadata.ru/api/v2/clean/birthdate
 func (daData *DaData) CleanBirthdates(sourceBirthdates ...string) ([]Birthdate, error) {
 	var birthdates []Birthdate
-	if sendErr := daData.sendCleanRequest("birthdate", &sourceBirthdates, &birthdates); nil == sendErr {
-		return birthdates, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("birthdate", &sourceBirthdates, &birthdates); err != nil {
+		return nil, err
 	}
+	return birthdates, nil
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/vehicle
-*/
+// CleanVehicles clean all provided vehicles
+// Call https://dadata.ru/api/v2/clean/vehicle
 func (daData *DaData) CleanVehicles(sourceVehicles ...string) ([]Vehicle, error) {
 	var vehicles []Vehicle
-	if sendErr := daData.sendCleanRequest("vehicle", &sourceVehicles, &vehicles); nil == sendErr {
-		return vehicles, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("vehicle", &sourceVehicles, &vehicles); err != nil {
+		return nil, err
 	}
+	return vehicles, nil
 }
 
-/*
-Call https://dadata.ru/api/v2/clean/passport
-*/
+// CleanPassports clean all provided passports
+// Call https://dadata.ru/api/v2/clean/passport
 func (daData *DaData) CleanPassports(sourcePassports ...string) ([]Passport, error) {
 	var passports []Passport
-	if sendErr := daData.sendCleanRequest("passport", &sourcePassports, &passports); nil == sendErr {
-		return passports, nil
-	} else {
-		return nil, sendErr
+	if err := daData.sendCleanRequest("passport", &sourcePassports, &passports); err != nil {
+		return nil, err
 	}
+	return passports, nil
 }
