@@ -1,12 +1,22 @@
 package dadata
 
+type SuggestRequestParamsLocation struct {
+	CityFiasID    string `json:"city_fias_id,omitempty"` // search only in this area
+	City          string `json:"city,omitempty"`
+	CityKladrID   string `json:"city_kladr_id,omitempty"`
+	FiasID        string `json:"fias_id,omitempty"`
+	KladrID       string `json:"kladr_id,omitempty"`
+	Region        string `json:"region,omitempty"`
+	RegionFiasID  string `json:"region_fias_id,omitempty"`
+	RegionKladrID string `json:"region_kladr_id,omitempty"`
+}
+
 // SuggestRequestParams Request struct
 type SuggestRequestParams struct {
-	Query     string `json:"query"` // user input for suggestion
-	Count     int    `json:"count"` // ligmit for results
-	Locations struct {
-		CityFiasID string `json:"city_fias_id"` // search only in this area
-	} `json:"locations"`
+	Query         string                         `json:"query"` // user input for suggestion
+	Count         int                            `json:"count"` // ligmit for results
+	Locations     []SuggestRequestParamsLocation `json:"locations"`
+	RestrictValue bool                           `json:"restrict_value"` // don't show restricts (region) on results
 }
 
 // SuggestAddressResponse result slice for address suggestions
