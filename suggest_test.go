@@ -46,6 +46,51 @@ func TestDaData_SuggestAddresses(t *testing.T) {
 	}
 }
 
+func TestDaData_SuggestAddressesWithConstarint(t *testing.T) {
+	tt := []struct {
+		name       string
+		query      string
+		wantRegion []string
+		wantErr    bool
+	}{
+		{
+			"long random chars",
+			"rliurihhjbgfihjvdfdsadakhvf",
+			[]string{},
+			false,
+		},
+		{
+			"popular address - ленина",
+			"ленина",
+			[]string{"Астраханская", "Астраханская"},
+			false,
+		},
+	}
+	for _, tc := range tt {
+		t.Run(tc.name, func(t *testing.T) {
+			daData := newSuggester()
+			req := SuggestRequestParams{
+				Query:         tc.query,
+				Count:         2,
+				RestrictValue: true,
+			}
+			req.Locations = append(req.Locations, SuggestRequestParamsLocation{Region: "астраханская"})
+			got, err := daData.SuggestAddresses(req)
+			if (err != nil) != tc.wantErr {
+				t.Errorf("DaData.SuggestAddresses() error = %v, wantErr %v", err, tc.wantErr)
+				return
+			}
+			regions := []string{}
+			for i := range got {
+				regions = append(regions, got[i].Data.Region)
+			}
+			if !reflect.DeepEqual(regions, tc.wantRegion) {
+				t.Errorf("DaData.SuggestAddresses() = %#v, want %#v", regions, tc.wantRegion)
+			}
+		})
+	}
+}
+
 func TestDaData_SuggestNames(t *testing.T) {
 	tt := []struct {
 		name      string
