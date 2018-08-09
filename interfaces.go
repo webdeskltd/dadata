@@ -81,3 +81,8 @@ type Suggester interface {
 	NamesSuggester
 	PartiesSuggester
 }
+
+// GeoIPDetector is the interface for detect address by client IP
+type GeoIPDetector interface {
+	GeoIP(ip string) (*GeoIPResponse, error)
+}
