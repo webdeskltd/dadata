@@ -32,6 +32,10 @@ func newSuggester() Suggester {
 	return instance()
 }
 
+func newGeoIPDetector() GeoIPDetector {
+	return instance()
+}
+
 func TestNewDaData(t *testing.T) {
 	apiKey := "apiKey"
 	secretKey := "secretKey"

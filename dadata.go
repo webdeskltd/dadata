@@ -37,7 +37,7 @@ func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *D
 	}
 }
 
-func (daData *DaData) sendRequest(lastURLPart string, source interface{}, result interface{}) error {
+func (daData *DaData) sendRequestToURL(method, url string, source interface{}, result interface{}) error {
 	buffer := &bytes.Buffer{}
 
 	if encodeErr := json.NewEncoder(buffer).Encode(source); nil != encodeErr {
@@ -45,7 +45,8 @@ func (daData *DaData) sendRequest(lastURLPart string, source interface{}, result
 		return encodeErr
 	}
 
-	request, requestErr := http.NewRequest("POST", baseURL+lastURLPart, buffer)
+	request, requestErr := http.NewRequest(method, url, buffer)
+
 	if nil != requestErr {
 		fmt.Printf("requestErr: %v", requestErr)
 		return requestErr
@@ -75,5 +76,9 @@ func (daData *DaData) sendRequest(lastURLPart string, source interface{}, result
 	}
 
 	return nil
+}
 
+// sendRequest
+func (daData *DaData) sendRequest(lastURLPart string, source interface{}, result interface{}) error {
+	return daData.sendRequestToURL("POST", baseURL+lastURLPart, source, result)
 }
