@@ -120,3 +120,26 @@ func ExampleDaData_SuggestParties() {
 	// МАГНУС АГРОХОЛДИНГ
 	// 1133123023186
 }
+
+func ExampleDaData_GeoIP() {
+	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
+
+	geoIPResponse, err := daData.GeoIP("83.220.54.223")
+	if nil != err {
+		fmt.Println(err)
+		return
+	}
+	if geoIPResponse.Location == nil {
+		fmt.Println("empty result from GeoIP")
+		return
+	}
+	address := geoIPResponse.Location.Data
+	fmt.Println(address.Country)
+	fmt.Println(address.City)
+	fmt.Printf("see on https://www.google.com/maps/@%s,%sf,14z\n", address.GeoLat, address.GeoLon)
+
+	// Output:
+	// Россия
+	// Москва
+	// see on https://www.google.com/maps/@55.7540471,37.620405f,14z
+}
