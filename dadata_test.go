@@ -36,6 +36,10 @@ func newGeoIPDetector() GeoIPDetector {
 	return instance()
 }
 
+func newAddressByIDDetector() ByIDFinder {
+	return instance()
+}
+
 func TestNewDaData(t *testing.T) {
 	apiKey := "apiKey"
 	secretKey := "secretKey"
