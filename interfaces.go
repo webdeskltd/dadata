@@ -86,3 +86,8 @@ type Suggester interface {
 type GeoIPDetector interface {
 	GeoIP(ip string) (*GeoIPResponse, error)
 }
+
+// ByIDFinder interface for return data by id
+type ByIDFinder interface {
+	AddressByID(id string) (*ResponseAddress, error)
+}

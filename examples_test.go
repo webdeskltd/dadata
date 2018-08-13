@@ -121,6 +121,22 @@ func ExampleDaData_SuggestParties() {
 	// 1133123023186
 }
 
+func ExampleDaData_AddressByID() {
+	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
+	addr, err := daData.AddressByID("6300000100000")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Printf("City: %s,\nFiasID: %s,\nKladr: %s\n", addr.Data.City, addr.Data.FiasId, addr.Data.KladrId)
+
+	// Output:
+	// City: Самара,
+	// FiasID: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b,
+	// Kladr: 6300000100000
+}
+
 func ExampleDaData_GeoIP() {
 	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
 
