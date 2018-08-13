@@ -43,3 +43,17 @@ const (
 	QC_CONFLICT_CITY_MATH   = 2 // Города адреса и телефона отличаются
 	QC_CONFLICT_REGION_MATH = 3 // Регионы адреса и телефона отличаются
 )
+
+// BoundValue type wrapper for suggest bounds
+// full documentation https://confluence.hflabs.ru/pages/viewpage.action?pageId=222888017
+type BoundValue string
+
+// const for SuggestBound
+const (
+	SuggestBoundRegion     BoundValue = "region"     // Регион
+	SuggestBoundArea       BoundValue = "area"       // Район
+	SuggestBoundCity       BoundValue = "city"       // Город
+	SuggestBoundSettlement BoundValue = "settlement" // Населенный пункт
+	SuggestBoundStreet     BoundValue = "street"     // Улица
+	SuggestBoundHouse      BoundValue = "house"      // Дом
+)
