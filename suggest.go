@@ -1,5 +1,7 @@
 package dadata
 
+// SuggestRequestParamsLocation constraints for suggestion
+// full documentation https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669108
 type SuggestRequestParamsLocation struct {
 	CityFiasID    string `json:"city_fias_id,omitempty"` // search only in this area
 	City          string `json:"city,omitempty"`
@@ -11,12 +13,21 @@ type SuggestRequestParamsLocation struct {
 	RegionKladrID string `json:"region_kladr_id,omitempty"`
 }
 
+// SuggestBound for granular sugestion
+// full documentation https://confluence.hflabs.ru/pages/viewpage.action?pageId=222888017
+type SuggestBound struct {
+	Value BoundValue
+}
+
 // SuggestRequestParams Request struct
 type SuggestRequestParams struct {
 	Query         string                         `json:"query"` // user input for suggestion
 	Count         int                            `json:"count"` // ligmit for results
 	Locations     []SuggestRequestParamsLocation `json:"locations"`
 	RestrictValue bool                           `json:"restrict_value"` // don't show restricts (region) on results
+
+	FromBound SuggestBound `json:"from_bound"`
+	ToBound   SuggestBound `json:"to_bound"`
 }
 
 // SuggestAddressResponse result slice for address suggestions

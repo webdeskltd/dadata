@@ -251,3 +251,57 @@ func TestDaData_SuggestEmails(t *testing.T) {
 		})
 	}
 }
+
+func TestDaData_SuggestAddressesWithBounds(t *testing.T) {
+	tt := []struct {
+		query            string
+		fromBound        BoundValue
+		toBound          BoundValue
+		constraintRegion string
+		wantValues       []string
+		wantErr          bool
+	}{
+		{
+			"Дудин",
+			SuggestBoundStreet,
+			SuggestBoundStreet,
+			"Москва",
+			[]string{"ул Дудинка"},
+			false,
+		},
+		{
+			"Сызр",
+			SuggestBoundCity,
+			SuggestBoundCity,
+			"Самарская",
+			[]string{"г Сызрань", "г Тольятти, Сызранский проезд"},
+			false,
+		},
+	}
+	for _, tc := range tt {
+		t.Run(tc.query+" "+string(tc.fromBound), func(t *testing.T) {
+			daData := newSuggester()
+			req := SuggestRequestParams{
+				Query:         tc.query,
+				Count:         2,
+				FromBound:     SuggestBound{tc.fromBound},
+				ToBound:       SuggestBound{tc.toBound},
+				RestrictValue: true,
+			}
+			req.Locations = append(req.Locations, SuggestRequestParamsLocation{Region: tc.constraintRegion})
+			got, err := daData.SuggestAddresses(req)
+
+			if (err != nil) != tc.wantErr {
+				t.Errorf("DaData.SuggestAddresses() error = %v, wantErr %v", err, tc.wantErr)
+				return
+			}
+			gotValues := []string{}
+			for i := range got {
+				gotValues = append(gotValues, got[i].Value)
+			}
+			if !reflect.DeepEqual(gotValues, tc.wantValues) {
+				t.Errorf("DaData.SuggestAddresses() = %#v, want %#v", gotValues, tc.wantValues)
+			}
+		})
+	}
+}
