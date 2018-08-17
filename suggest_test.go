@@ -274,7 +274,7 @@ func TestDaData_SuggestAddressesWithBounds(t *testing.T) {
 			SuggestBoundCity,
 			SuggestBoundCity,
 			"Самарская",
-			[]string{"г Сызрань", "г Тольятти, Сызранский проезд"},
+			[]string{"г Сызрань"},
 			false,
 		},
 	}
@@ -309,9 +309,9 @@ func TestDaData_SuggestAddressesWithBounds(t *testing.T) {
 func TestDaData_RegionSuggest(t *testing.T) {
 	daData := newSuggester()
 	req := SuggestRequestParams{
-		Query: "Санкт",
-		FromBound:SuggestBound{Value:"region"},
-		ToBound:SuggestBound{Value:"region"},
+		Query:     "Санкт",
+		FromBound: SuggestBound{Value: "region"},
+		ToBound:   SuggestBound{Value: "region"},
 	}
 
 	got, err := daData.SuggestAddresses(req)
