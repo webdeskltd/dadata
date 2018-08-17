@@ -305,3 +305,21 @@ func TestDaData_SuggestAddressesWithBounds(t *testing.T) {
 		})
 	}
 }
+
+func TestDaData_RegionSuggest(t *testing.T) {
+	daData := newSuggester()
+	req := SuggestRequestParams{
+		Query: "Санкт",
+		FromBound:SuggestBound{Value:"region"},
+		ToBound:SuggestBound{Value:"region"},
+	}
+
+	got, err := daData.SuggestAddresses(req)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if len(got) != 1 {
+		t.Errorf("suggest by %v and bound 'region' return > 1 response", req.Query)
+	}
+}

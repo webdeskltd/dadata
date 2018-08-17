@@ -28,7 +28,7 @@ type SuggestRequestParamsLocation struct {
 // SuggestBound for granular sugestion
 // full documentation https://confluence.hflabs.ru/pages/viewpage.action?pageId=222888017
 type SuggestBound struct {
-	Value BoundValue
+	Value BoundValue `json:"value"`
 }
 
 // SuggestRequestParams Request struct
