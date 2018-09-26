@@ -112,16 +112,16 @@ type Phone struct {
 
 // Name base struct for dadata.Name
 type Name struct {
-	Source         string `json:"source"`          // Исходное ФИО одной строкой
-	Result         string `json:"result"`          // Стандартизованное ФИО одной строкой
-	ResultGenitive string `json:"result_genitive"` // ФИО в родительном падеже (кого?)
-	ResultDative   string `json:"result_dative"`   // ФИО в дательном падеже (кому?)
-	ResultAblative string `json:"result_ablative"` // ФИО в творительном падеже (кем?)
-	Surname        string `json:"surname"`         // Фамилия
-	Name           string `json:"name"`            // Имя
-	Patronymic     string `json:"patronymic"`      // Отчество
-	Gender         string `json:"gender"`          // Пол
-	QualityCode    int    `json:"qc"`              // Код качества
+	Source         string      `json:"source"`          // Исходное ФИО одной строкой
+	Result         string      `json:"result"`          // Стандартизованное ФИО одной строкой
+	ResultGenitive string      `json:"result_genitive"` // ФИО в родительном падеже (кого?)
+	ResultDative   string      `json:"result_dative"`   // ФИО в дательном падеже (кому?)
+	ResultAblative string      `json:"result_ablative"` // ФИО в творительном падеже (кем?)
+	Surname        string      `json:"surname"`         // Фамилия
+	Name           string      `json:"name"`            // Имя
+	Patronymic     string      `json:"patronymic"`      // Отчество
+	Gender         string      `json:"gender"`          // Пол
+	QualityCode    interface{} `json:"qc"`              // Код качества
 }
 
 // ResponseName api response for name
