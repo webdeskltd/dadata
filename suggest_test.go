@@ -99,9 +99,9 @@ func TestDaData_SuggestNames(t *testing.T) {
 		wantErr   bool
 	}{
 		{
-			"long random chars",
-			"rliurihhjbgfihjvdfdsadakhvf",
-			[]string{},
+			"rare name",
+			"Юст",
+			[]string{"Юстус", "Юст"},
 			false,
 		},
 		{

@@ -5,6 +5,7 @@ package dadata
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -37,20 +38,24 @@ func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *D
 	}
 }
 
-func (daData *DaData) sendRequestToURL(method, url string, source interface{}, result interface{}) error {
+func (daData *DaData) sendRequestToURL(ctx context.Context, method, url string, source interface{}, result interface{}) error {
+	if err := ctx.Err(); err != nil {
+		return fmt.Errorf("sendRequestToURL: ctx.Err return err=%v", err)
+	}
+
 	buffer := &bytes.Buffer{}
 
-	if encodeErr := json.NewEncoder(buffer).Encode(source); nil != encodeErr {
-		fmt.Printf("encodeErr: %v", encodeErr)
-		return encodeErr
+	if err := json.NewEncoder(buffer).Encode(source); err != nil {
+		return fmt.Errorf("sendRequestToURL: json.Encode return err = %v", err)
 	}
 
-	request, requestErr := http.NewRequest(method, url, buffer)
+	request, err := http.NewRequest(method, url, buffer)
 
-	if nil != requestErr {
-		fmt.Printf("requestErr: %v", requestErr)
-		return requestErr
+	if err != nil {
+		return fmt.Errorf("sendRequestToURL: http.NewRequest return err = %v", err)
 	}
+
+	request = request.WithContext(ctx)
 
 	request.Header.Add("Authorization", fmt.Sprintf("Token %s", daData.apiKey))
 	request.Header.Add("X-Secret", daData.secretKey)
@@ -58,27 +63,25 @@ func (daData *DaData) sendRequestToURL(method, url string, source interface{}, r
 	request.Header.Add("Accept", "application/json")
 	request.Header.Set("Connection", "close")
 
-	response, httpErr := daData.httpClient.Do(request)
-	if nil != httpErr {
-		fmt.Printf("httpErr: %v", httpErr)
-		return httpErr
+	response, err := daData.httpClient.Do(request)
+	if err != nil {
+		return fmt.Errorf("sendRequestToURL: httpClient.Do return err = %v", err)
 	}
 
 	defer response.Body.Close()
 
 	if http.StatusOK != response.StatusCode {
-		return fmt.Errorf("Request error %v", response.Status)
+		return fmt.Errorf("sendRequestToURL: Request error %v", response.Status)
 	}
 
-	if decodeErr := json.NewDecoder(response.Body).Decode(&result); nil != decodeErr {
-		fmt.Printf("decodeErr: %v", decodeErr)
-		return decodeErr
+	if err := json.NewDecoder(response.Body).Decode(&result); err != nil {
+		return fmt.Errorf("sendRequestToURL: json.Decode return err = %v", err)
 	}
 
 	return nil
 }
 
 // sendRequest
-func (daData *DaData) sendRequest(lastURLPart string, source interface{}, result interface{}) error {
-	return daData.sendRequestToURL("POST", baseURL+lastURLPart, source, result)
+func (daData *DaData) sendRequest(ctx context.Context, lastURLPart string, source interface{}, result interface{}) error {
+	return daData.sendRequestToURL(ctx, "POST", baseURL+lastURLPart, source, result)
 }

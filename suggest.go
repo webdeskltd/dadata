@@ -1,5 +1,7 @@
 package dadata
 
+import "context"
+
 // SuggestRequestParamsLocation constraints for suggestion
 // full documentation https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669108
 type SuggestRequestParamsLocation struct {
@@ -67,15 +69,20 @@ type SuggestEmailResponse struct {
 	Suggestions []ResponseEmail `json:"suggestions"`
 }
 
-func (daData *DaData) sendSuggestRequest(lastURLPart string, requestParams SuggestRequestParams, result interface{}) error {
-	return daData.sendRequest("suggest/"+lastURLPart, requestParams, result)
+func (daData *DaData) sendSuggestRequest(ctx context.Context, lastURLPart string, requestParams SuggestRequestParams, result interface{}) error {
+	return daData.sendRequest(ctx, "suggest/"+lastURLPart, requestParams, result)
 }
 
 // SuggestAddresses try to return suggest addresses by requestParams
 func (daData *DaData) SuggestAddresses(requestParams SuggestRequestParams) ([]ResponseAddress, error) {
+	return daData.SuggestAddressesWithCtx(context.Background(), requestParams)
+}
+
+// SuggestAddressesWithCtx try to return suggest addresses by requestParams
+func (daData *DaData) SuggestAddressesWithCtx(ctx context.Context, requestParams SuggestRequestParams) ([]ResponseAddress, error) {
 
 	result := SuggestAddressResponse{}
-	if err := daData.sendSuggestRequest("address", requestParams, &result); err != nil {
+	if err := daData.sendSuggestRequest(ctx, "address", requestParams, &result); err != nil {
 		return nil, err
 	}
 
@@ -84,9 +91,14 @@ func (daData *DaData) SuggestAddresses(requestParams SuggestRequestParams) ([]Re
 
 // SuggestNames try to return suggest names by requestParams
 func (daData *DaData) SuggestNames(requestParams SuggestRequestParams) ([]ResponseName, error) {
+	return daData.SuggestNamesWithCtx(context.Background(), requestParams)
+}
+
+// SuggestNamesWithCtx try to return suggest names by requestParams
+func (daData *DaData) SuggestNamesWithCtx(ctx context.Context, requestParams SuggestRequestParams) ([]ResponseName, error) {
 
 	result := SuggestNameResponse{}
-	if err := daData.sendSuggestRequest("fio", requestParams, &result); err != nil {
+	if err := daData.sendSuggestRequest(ctx, "fio", requestParams, &result); err != nil {
 		return nil, err
 	}
 
@@ -95,9 +107,14 @@ func (daData *DaData) SuggestNames(requestParams SuggestRequestParams) ([]Respon
 
 // SuggestBanks try to return suggest banks by requestParams
 func (daData *DaData) SuggestBanks(requestParams SuggestRequestParams) ([]ResponseBank, error) {
+	return daData.SuggestBanksWithCtx(context.Background(), requestParams)
+}
+
+// SuggestBanksWithCtx try to return suggest banks by requestParams
+func (daData *DaData) SuggestBanksWithCtx(ctx context.Context, requestParams SuggestRequestParams) ([]ResponseBank, error) {
 
 	result := SuggestBankResponse{}
-	if err := daData.sendSuggestRequest("bank", requestParams, &result); err != nil {
+	if err := daData.sendSuggestRequest(ctx, "bank", requestParams, &result); err != nil {
 		return nil, err
 	}
 
@@ -106,9 +123,14 @@ func (daData *DaData) SuggestBanks(requestParams SuggestRequestParams) ([]Respon
 
 // SuggestParties try to return suggest parties by requestParams
 func (daData *DaData) SuggestParties(requestParams SuggestRequestParams) ([]ResponseParty, error) {
+	return daData.SuggestPartiesWithCtx(context.Background(), requestParams)
+}
+
+// SuggestPartiesWithCtx try to return suggest parties by requestParams
+func (daData *DaData) SuggestPartiesWithCtx(ctx context.Context, requestParams SuggestRequestParams) ([]ResponseParty, error) {
 
 	result := SuggestPartyResponse{}
-	if err := daData.sendSuggestRequest("party", requestParams, &result); err != nil {
+	if err := daData.sendSuggestRequest(ctx, "party", requestParams, &result); err != nil {
 		return nil, err
 	}
 
@@ -117,9 +139,14 @@ func (daData *DaData) SuggestParties(requestParams SuggestRequestParams) ([]Resp
 
 // SuggestEmails try to return suggest emails by requestParams
 func (daData *DaData) SuggestEmails(requestParams SuggestRequestParams) ([]ResponseEmail, error) {
+	return daData.SuggestEmailsWithCtx(context.Background(), requestParams)
+}
+
+// SuggestEmailsWithCtx try to return suggest emails by requestParams
+func (daData *DaData) SuggestEmailsWithCtx(ctx context.Context, requestParams SuggestRequestParams) ([]ResponseEmail, error) {
 
 	result := SuggestEmailResponse{}
-	if err := daData.sendSuggestRequest("email", requestParams, &result); err != nil {
+	if err := daData.sendSuggestRequest(ctx, "email", requestParams, &result); err != nil {
 		return nil, err
 	}
 
