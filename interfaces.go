@@ -1,5 +1,10 @@
 package dadata
 
+import (
+	"context"
+	"time"
+)
+
 // AddressesCleaner is the interface for cleaning Addresses
 type AddressesCleaner interface {
 	CleanAddresses(addresses ...string) ([]Address, error)
@@ -90,4 +95,9 @@ type GeoIPDetector interface {
 // ByIDFinder interface for return data by id
 type ByIDFinder interface {
 	AddressByID(id string) (*ResponseAddress, error)
+}
+
+// Stater interface for return daily statistics
+type Stater interface {
+	DailyStat(ctx context.Context, date time.Time) (*StatResponse, error)
 }
