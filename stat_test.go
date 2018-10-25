@@ -39,7 +39,8 @@ func TestDaData_DailyStat(t *testing.T) {
 				return
 			}
 			// check stat for current date - it's must be more than 0
-			if got.Services.Clean == 0 {
+			// TODO Не корректно проверять на 0 статистику которая может быть нулевой
+			if got.Services.Merging == 0 && tt.date != currentDate {
 				t.Errorf("DaData.DailyStat() = return for current date %v - stat must be more than 0", tt.date)
 			}
 		})
