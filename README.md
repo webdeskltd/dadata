@@ -1,8 +1,9 @@
-# Client for DaData.ru 
+# Client for DaData.ru
 [![Build Status](https://travis-ci.org/webdeskltd/dadata.svg)](https://travis-ci.org/webdeskltd/dadata)  [![GoDoc](https://godoc.org/github.com/webdeskltd/dadata?status.png)](http://godoc.org/github.com/webdeskltd/dadata)
 
-Implemented [Clean](https://dadata.ru/api/clean/) 
-and [Suggest](https://dadata.ru/api/suggest/) methods
+Dadata API v2
+
+Implemented [Clean](https://dadata.ru/api/clean/) and [Suggest](https://dadata.ru/api/suggest/) methods.
 
 ## Installation
 
