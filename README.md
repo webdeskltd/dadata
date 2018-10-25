@@ -1,5 +1,5 @@
 # Client for DaData.ru
-[![Build Status](https://travis-ci.org/webdeskltd/dadata.svg)](https://travis-ci.org/webdeskltd/dadata)
+[![Build Status](https://travis-ci.org/webdeskltd/dadata.svg?branch=v2)](https://travis-ci.org/webdeskltd/dadata)
 [![GoDoc](https://godoc.org/gopkg.in/webdeskltd/dadata.v2?status.svg)](https://godoc.org/gopkg.in/webdeskltd/dadata.v2)
 
 DaData API v2
