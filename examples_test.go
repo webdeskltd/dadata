@@ -202,7 +202,7 @@ func ExampleDaData_SuggestAddressesWithCtx() {
 
 	var req SuggestRequestParams
 
-	ctx, cancel := context.WithTimeout(context.Background(), 400*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 
 	req.Query = "лен"
 
