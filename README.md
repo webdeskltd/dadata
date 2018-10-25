@@ -1,13 +1,14 @@
 # Client for DaData.ru
-[![Build Status](https://travis-ci.org/webdeskltd/dadata.svg)](https://travis-ci.org/webdeskltd/dadata)  [![GoDoc](https://godoc.org/github.com/webdeskltd/dadata?status.png)](http://godoc.org/github.com/webdeskltd/dadata)
+[![Build Status](https://travis-ci.org/webdeskltd/dadata.svg)](https://travis-ci.org/webdeskltd/dadata)
+[![GoDoc](https://godoc.org/gopkg.in/webdeskltd/dadata.v2?status.svg)](https://godoc.org/gopkg.in/webdeskltd/dadata.v2)
 
-Dadata API v2
+DaData API v2
 
 Implemented [Clean](https://dadata.ru/api/clean/) and [Suggest](https://dadata.ru/api/suggest/) methods.
 
 ## Installation
 
-`go get github.com/webdeskltd/dadata`
+`go get gopkg.in/webdeskltd/dadata.v2`
 
 ## Usage
 ```go
@@ -16,7 +17,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/webdeskltd/dadata"
+	"gopkg.in/webdeskltd/dadata.v2"
 )
 
 func main() {
