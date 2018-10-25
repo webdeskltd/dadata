@@ -17,8 +17,8 @@ func TestDaData_DetectAddressByIP(t *testing.T) {
 		{"wrong ip", "xxx.999.ss.23", "", true},
 		{"google proxy", "8.8.8.8", "", true},
 		{"some msk ip", "85.235.162.70", "Москва", false},
-		{"some kazan ip", "217.118.95.255", "Казань", false},
-		{"some petropavl kamchats ip", "80.83.239.112", "Петропавловск-Камчатский", false},
+		{"some belgorod ip", "217.118.95.255", "Белгород", false},
+		{"some vladivostok ip", "80.83.239.112", "Владивосток", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

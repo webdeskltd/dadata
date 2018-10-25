@@ -1,8 +1,10 @@
 package dadata_test
 
 import (
+	"context"
 	"fmt"
 	"os"
+	"time"
 
 	. "github.com/webdeskltd/dadata"
 )
@@ -193,4 +195,44 @@ func ExampleDaData_SuggestAddressesGranular() {
 	// Ленина
 	// Самарская обл, г Сызрань, ул Ленинградская
 	// Ленинградская
+}
+
+func ExampleDaData_SuggestAddressesWithCtx() {
+	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
+
+	var req SuggestRequestParams
+
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+
+	req.Query = "лен"
+
+	req.Locations = append(req.Locations, SuggestRequestParamsLocation{
+		RegionFiasID: "df3d7359-afa9-4aaa-8ff9-197e73906b1c",
+		CityFiasID:   "e9e684ce-7d60-4480-ba14-ca6da658188b",
+	})
+
+	req.FromBound = SuggestBound{SuggestBoundStreet}
+	req.ToBound = SuggestBound{SuggestBoundStreet}
+
+	req.RestrictValue = true
+	req.Count = 2
+
+	addresses, err := daData.SuggestAddressesWithCtx(ctx, req)
+	if nil != err {
+		fmt.Println(err)
+	}
+
+	for _, address := range addresses {
+		fmt.Println(address.UnrestrictedValue)
+	}
+
+	cancel()
+	// if ctx is exited (by cancel or timeout) we must catch err
+	_, err = daData.SuggestAddressesWithCtx(ctx, req)
+	fmt.Println(err)
+
+	// Output:
+	// Самарская обл, г Сызрань, ул Ленина
+	// Самарская обл, г Сызрань, ул Ленинградская
+	// sendRequestToURL: ctx.Err return err=context canceled
 }
