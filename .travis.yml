@@ -27,10 +27,10 @@ branches:
   - v2
   - master
 
-#notifications:
-#  email:
-#    on_success: change
-#    on_failure: always
+notifications:
+  email:
+    on_success: change
+    on_failure: always
 
 script:
   - go install ./...
