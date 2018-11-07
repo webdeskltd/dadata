@@ -101,3 +101,7 @@ type ByIDFinder interface {
 type Stater interface {
 	DailyStat(ctx context.Context, date time.Time) (*StatResponse, error)
 }
+
+type ProfileBalance interface {
+	ProfileBalance(ctx context.Context) (*BalanceResponse, error)
+}

@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	. "github.com/webdeskltd/dadata"
+	. "github.com/webdeskltd/dadata/v2"
 )
 
 var (
@@ -41,6 +41,10 @@ func newAddressByIDDetector() ByIDFinder {
 }
 
 func newStater() Stater {
+	return instance()
+}
+
+func newBalance() ProfileBalance {
 	return instance()
 }
 

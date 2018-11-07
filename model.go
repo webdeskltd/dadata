@@ -286,3 +286,9 @@ type StatResponse struct {
 		Clean       int `json:"clean"`
 	} `json:"services"`
 }
+
+// BalanceResponse usage for check balance
+// see docs https://dadata.ru/api/balance/
+type BalanceResponse struct {
+	Balance float64 `json:"balance"`
+}

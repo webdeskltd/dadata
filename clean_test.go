@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-test/deep"
-	. "github.com/webdeskltd/dadata"
+	. "github.com/webdeskltd/dadata/v2"
 )
 
 func TestCleanAddresses(t *testing.T) {

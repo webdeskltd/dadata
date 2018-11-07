@@ -10,15 +10,27 @@ go:
   - "1.11.x"
   - master
 
+env:
+  - GO111MODULE=on
+
+matrix:
+  include:
+    - go: "1.11.x"
+      script:
+        - go mod tidy
+        - go test -v -mod=vendor ./...
+
+install: true
+
 branches:
   only:
   - v2
   - master
 
-notifications:
-  email:
-    on_success: change
-    on_failure: always
+#notifications:
+#  email:
+#    on_success: change
+#    on_failure: always
 
 script:
   - go install ./...

@@ -26,6 +26,7 @@ func TestDaData_DetectAddressByIP(t *testing.T) {
 
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DaData.GeoIP() error = %v, wantErr %v", err, tt.wantErr)
+				return
 			}
 			if tt.wantErr {
 				// after wantErr it's make no sence check got - want
