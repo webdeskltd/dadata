@@ -20,6 +20,9 @@ notifications:
     on_success: change
     on_failure: always
 
+before_script:
+  - go get -u gopkg.in/webdeskltd/dadata.v2
+
 script:
   - go install ./...
   - diff -u <(echo -n) <(gofmt -d .)
