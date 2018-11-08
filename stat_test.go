@@ -1,7 +1,6 @@
 package dadata_test
 
 import (
-	"context"
 	"testing"
 	"time"
 )
@@ -26,7 +25,7 @@ func TestDaData_DailyStat(t *testing.T) {
 		t.Run(tt.date, func(t *testing.T) {
 			daData := newStater()
 			date, _ := time.Parse(format, tt.date)
-			got, err := daData.DailyStat(context.Background(), date)
+			got, err := daData.DailyStat(date)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DaData.DailyStat() error = %v, wantErr %v", err, tt.wantErr)
 				return

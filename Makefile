@@ -42,7 +42,7 @@ test: link
 .PHONY: test
 
 ## Displaying in the browser coverage of tested code, on the html report (Run only during development!)
-cover:
+cover: test
 	GOPATH=${GOPATH} go tool cover -html=$(DIR)/coverage.log
 .PHONY: cover
 

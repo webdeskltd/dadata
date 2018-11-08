@@ -131,7 +131,7 @@ func ExampleDaData_AddressByID() {
 		return
 	}
 
-	fmt.Printf("City: %s,\nFiasID: %s,\nKladr: %s\n", addr.Data.City, addr.Data.FiasId, addr.Data.KladrId)
+	fmt.Printf("City: %s,\nFiasID: %s,\nKladr: %s\n", addr.Data.City, addr.Data.FiasID, addr.Data.KladrID)
 
 	// Output:
 	// City: Самара,

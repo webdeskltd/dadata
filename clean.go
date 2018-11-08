@@ -14,12 +14,11 @@ func (daData *DaData) CleanAddresses(sourceAddresses ...string) ([]Address, erro
 
 // CleanAddressesWithCtx clean all provided addresses
 // Call https://dadata.ru/api/v2/clean/address
-func (daData *DaData) CleanAddressesWithCtx(ctx context.Context, sourceAddresses ...string) ([]Address, error) {
-	var addresses []Address
-	if err := daData.sendCleanRequest(ctx, "address", &sourceAddresses, &addresses); err != nil {
-		return nil, err
+func (daData *DaData) CleanAddressesWithCtx(ctx context.Context, sourceAddresses ...string) (addresses []Address, err error) {
+	if err = daData.sendCleanRequest(ctx, "address", &sourceAddresses, &addresses); err != nil {
+		addresses = nil
 	}
-	return addresses, nil
+	return
 }
 
 // CleanPhones clean all provided phones
@@ -30,12 +29,11 @@ func (daData *DaData) CleanPhones(sourcePhones ...string) ([]Phone, error) {
 
 // CleanPhonesWithCtx clean all provided phones
 // Call https://dadata.ru/api/v2/clean/phone
-func (daData *DaData) CleanPhonesWithCtx(ctx context.Context, sourcePhones ...string) ([]Phone, error) {
-	var phones []Phone
-	if err := daData.sendCleanRequest(ctx, "phone", &sourcePhones, &phones); err != nil {
-		return nil, err
+func (daData *DaData) CleanPhonesWithCtx(ctx context.Context, sourcePhones ...string) (phones []Phone, err error) {
+	if err = daData.sendCleanRequest(ctx, "phone", &sourcePhones, &phones); err != nil {
+		phones = nil
 	}
-	return phones, nil
+	return
 }
 
 // CleanNames clean all provided names
@@ -46,12 +44,11 @@ func (daData *DaData) CleanNames(sourceNames ...string) ([]Name, error) {
 
 // CleanNamesWithCtx clean all provided names
 // Call https://dadata.ru/api/v2/clean/name
-func (daData *DaData) CleanNamesWithCtx(ctx context.Context, sourceNames ...string) ([]Name, error) {
-	var names []Name
-	if err := daData.sendCleanRequest(ctx, "name", &sourceNames, &names); err != nil {
-		return nil, err
+func (daData *DaData) CleanNamesWithCtx(ctx context.Context, sourceNames ...string) (names []Name, err error) {
+	if err = daData.sendCleanRequest(ctx, "name", &sourceNames, &names); err != nil {
+		names = nil
 	}
-	return names, nil
+	return
 }
 
 // CleanEmails clean all provided emails
@@ -62,12 +59,11 @@ func (daData *DaData) CleanEmails(sourceEmails ...string) ([]Email, error) {
 
 // CleanEmailsWithCtx clean all provided emails
 // Call https://dadata.ru/api/v2/clean/email
-func (daData *DaData) CleanEmailsWithCtx(ctx context.Context, sourceEmails ...string) ([]Email, error) {
-	var emails []Email
-	if err := daData.sendCleanRequest(ctx, "email", &sourceEmails, &emails); err != nil {
-		return nil, err
+func (daData *DaData) CleanEmailsWithCtx(ctx context.Context, sourceEmails ...string) (emails []Email, err error) {
+	if err = daData.sendCleanRequest(ctx, "email", &sourceEmails, &emails); err != nil {
+		emails = nil
 	}
-	return emails, nil
+	return
 }
 
 // CleanBirthdates clean all provided birthdates
@@ -78,12 +74,11 @@ func (daData *DaData) CleanBirthdates(sourceBirthdates ...string) ([]Birthdate, 
 
 // CleanBirthdatesWithCtx clean all provided birthdates
 // Call https://dadata.ru/api/v2/clean/birthdate
-func (daData *DaData) CleanBirthdatesWithCtx(ctx context.Context, sourceBirthdates ...string) ([]Birthdate, error) {
-	var birthdates []Birthdate
-	if err := daData.sendCleanRequest(ctx, "birthdate", &sourceBirthdates, &birthdates); err != nil {
-		return nil, err
+func (daData *DaData) CleanBirthdatesWithCtx(ctx context.Context, sourceBirthdates ...string) (birthdates []Birthdate, err error) {
+	if err = daData.sendCleanRequest(ctx, "birthdate", &sourceBirthdates, &birthdates); err != nil {
+		birthdates = nil
 	}
-	return birthdates, nil
+	return
 }
 
 // CleanVehicles clean all provided vehicles
@@ -94,12 +89,11 @@ func (daData *DaData) CleanVehicles(sourceVehicles ...string) ([]Vehicle, error)
 
 // CleanVehiclesWithCtx clean all provided vehicles
 // Call https://dadata.ru/api/v2/clean/vehicle
-func (daData *DaData) CleanVehiclesWithCtx(ctx context.Context, sourceVehicles ...string) ([]Vehicle, error) {
-	var vehicles []Vehicle
-	if err := daData.sendCleanRequest(ctx, "vehicle", &sourceVehicles, &vehicles); err != nil {
-		return nil, err
+func (daData *DaData) CleanVehiclesWithCtx(ctx context.Context, sourceVehicles ...string) (vehicles []Vehicle, err error) {
+	if err = daData.sendCleanRequest(ctx, "vehicle", &sourceVehicles, &vehicles); err != nil {
+		vehicles = nil
 	}
-	return vehicles, nil
+	return
 }
 
 // CleanPassports clean all provided passports
@@ -110,10 +104,9 @@ func (daData *DaData) CleanPassports(sourcePassports ...string) ([]Passport, err
 
 // CleanPassportsWithCtx clean all provided passports
 // Call https://dadata.ru/api/v2/clean/passport
-func (daData *DaData) CleanPassportsWithCtx(ctx context.Context, sourcePassports ...string) ([]Passport, error) {
-	var passports []Passport
-	if err := daData.sendCleanRequest(ctx, "passport", &sourcePassports, &passports); err != nil {
-		return nil, err
+func (daData *DaData) CleanPassportsWithCtx(ctx context.Context, sourcePassports ...string) (passports []Passport, err error) {
+	if err = daData.sendCleanRequest(ctx, "passport", &sourcePassports, &passports); err != nil {
+		passports = nil
 	}
-	return passports, nil
+	return
 }

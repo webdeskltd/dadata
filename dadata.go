@@ -11,7 +11,9 @@ import (
 	"net/http"
 )
 
-const baseURL = "https://dadata.ru/api/v2/"
+const constBaseURL = "https://dadata.ru/api/v2/"
+
+var baseURL = constBaseURL
 
 // DaData client for DaData.ru (https://dadata.ru/)
 type DaData struct {
