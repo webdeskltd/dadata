@@ -1,4 +1,4 @@
-package dadata
+package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 
 import (
 	"net/http"

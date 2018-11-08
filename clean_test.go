@@ -3,8 +3,9 @@ package dadata_test
 import (
 	"testing"
 
+	. "gopkg.in/webdeskltd/dadata.v2"
+
 	"github.com/go-test/deep"
-	. "github.com/webdeskltd/dadata"
 )
 
 func TestCleanAddresses(t *testing.T) {

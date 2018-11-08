@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	. "github.com/webdeskltd/dadata"
+	. "gopkg.in/webdeskltd/dadata.v2"
 )
 
 func ExampleDaData_CleanAddresses() {

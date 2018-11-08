@@ -1,4 +1,4 @@
-package dadata
+package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 
 // Определите, нужна ли дополнительная проверка оператором, используя код качества (qc):
 const (

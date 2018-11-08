@@ -1,4 +1,4 @@
-package dadata
+package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 
 // SuggestRequestParamsLocation constraints for suggestion
 // full documentation https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669108

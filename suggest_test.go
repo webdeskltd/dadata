@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/webdeskltd/dadata"
+	. "gopkg.in/webdeskltd/dadata.v2"
 )
 
 func TestDaData_SuggestAddresses(t *testing.T) {

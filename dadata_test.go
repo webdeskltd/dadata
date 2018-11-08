@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	. "github.com/webdeskltd/dadata"
+	. "gopkg.in/webdeskltd/dadata.v2"
 )
 
 var (

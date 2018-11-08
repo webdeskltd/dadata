@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/webdeskltd/dadata"
+	. "gopkg.in/webdeskltd/dadata.v2"
 )
 
 // Тестирование нормального ответа

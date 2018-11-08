@@ -1,4 +1,4 @@
-package dadata
+package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 
 // Address base struct for datdata.Address
 type Address struct {

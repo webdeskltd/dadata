@@ -1,7 +1,7 @@
 // Golang client library for DaData.ru (https://dadata.ru/).
 
-// Package dadata implemented only cleaning (https://dadata.ru/api/clean/) and suggesting (https://dadata.ru/api/suggest/)
-package dadata
+// Package dadata implemented cleaning (https://dadata.ru/api/clean/) and suggesting (https://dadata.ru/api/suggest/)
+package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 
 import (
 	"bytes"

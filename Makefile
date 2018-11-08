@@ -13,8 +13,7 @@ default: link test
 ## Creating or linking folders to meet golang requirements for package folder locations
 link:
 	@mkdir -p $(DIR)/src/${REPNAME}; cd $(DIR)/src/${REPNAME} && ln -s ../../.. ${PRODUCT} 2>/dev/null; true
-	@mkdir -p $(DIR)/src/github.com/webdeskltd; cd $(DIR)/src/github.com/webdeskltd && ln -s ../../.. dadata 2>/dev/null; true
-	@ln -s $(DIR)/vendor $(DIR)/src/vendor 2>/dev/null; true
+	@rm $(DIR)/src/vendor 2>/dev/null; ln -s $(DIR)/vendor $(DIR)/src/vendor 2>/dev/null; true
 .PHONY: link
 
 ## Dependence managers
