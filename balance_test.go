@@ -25,12 +25,12 @@ func TestDaDataProfileBalance(t *testing.T) {
 func TestDaDataProfileBalanceWithCancel(t *testing.T) {
 	var err error
 	var ctx context.Context
-	var bci Balancer
+	var ctf context.CancelFunc
 	var rsp *BalanceResponse
 
-	ctx, _ = context.WithTimeout(context.Background(), time.Microsecond*10)
-	bci = newBalance()
-	rsp, err = bci.ProfileBalanceWithCtx(ctx)
+	ctx, ctf = context.WithTimeout(context.Background(), time.Microsecond*10)
+	defer ctf()
+	rsp, err = newBalance().ProfileBalanceWithCtx(ctx)
 	if err == nil {
 		t.Errorf("DaData.ProfileBalance() error, do not work context deadline exceeded")
 		return

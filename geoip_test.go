@@ -28,7 +28,7 @@ func TestDaData_DetectAddressByIP(t *testing.T) {
 				t.Errorf("DaData.GeoIP() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if tt.wantErr {
-				// after wantErr it's make no sence check got - want
+				// after wantErr it's make no sense check got - want
 				return
 			}
 			if !reflect.DeepEqual(got.Location.Data.City, tt.wantCity) {

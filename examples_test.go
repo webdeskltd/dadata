@@ -162,7 +162,7 @@ func ExampleDaData_GeoIP() {
 	// see on https://www.google.com/maps/@55.7540471,37.620405f,14z
 }
 
-func ExampleDaData_SuggestAddressesGranular() {
+func ExampleDaData_SuggestAddresses_granular() {
 	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
 
 	var req SuggestRequestParams

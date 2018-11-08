@@ -26,7 +26,7 @@ func TestDaData_AddressByID(t *testing.T) {
 				t.Errorf("DaData.AddressByID() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if tt.wantErr {
-				// after wantErr it's make no sence check got - want
+				// after wantErr it's make no sense check got - want
 				return
 			}
 			if got == nil {
