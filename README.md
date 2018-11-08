@@ -2,6 +2,7 @@
 
 [![GoDoc](https://godoc.org/gopkg.in/webdeskltd/dadata.v2?status.svg)](https://godoc.org/gopkg.in/webdeskltd/dadata.v2)
 [![Go Report Card](https://goreportcard.com/badge/gopkg.in/webdeskltd/dadata.v2)](https://goreportcard.com/report/gopkg.in/webdeskltd/dadata.v2)
+[![Coverage Status](https://coveralls.io/repos/github/webdeskltd/dadata/badge.svg?branch=v2)](https://coveralls.io/github/webdeskltd/dadata?branch=v2)
 [![Build Status](https://travis-ci.org/webdeskltd/dadata.svg?branch=v2)](https://travis-ci.org/webdeskltd/dadata)
 
 DaData API v2
