@@ -10,19 +10,19 @@ BENCHPACKETS=$(shell if [ -f .benchpackages ]; then cat .benchpackages; fi)
 
 default: link test
 
-## Creating or linking folders to meet golang requirements for package folder locations
+## Creating and linking folders to meet golang requirements for locations
 link:
 	@mkdir -p $(DIR)/src/${REPNAME}; cd $(DIR)/src/${REPNAME} && ln -s ../../.. ${PRODUCT} 2>/dev/null; true
 	@rm $(DIR)/src/vendor 2>/dev/null; ln -s $(DIR)/vendor $(DIR)/src/vendor 2>/dev/null; true
 .PHONY: link
 
-## Dependence managers
+## Dependency manager
 # Install: go get -u github.com/FiloSottile/gvt
 dep: link
 	@if command -v "gvt"; then GOPATH="$(DIR)" gvt update -all; fi
 .PHONY: dep
 
-## Code generation (Run only during development!)
+## Code generation (run only during development)
 # All generating files are included in a .gogenerate file
 gen:
 	@for PKGNAME in $(GOGENERATE); do GOPATH="$(DIR)" go generate $${PKGNAME}; done
@@ -41,7 +41,7 @@ test: link
 	done
 .PHONY: test
 
-## Displaying in the browser coverage of tested code, on the html report (Run only during development!)
+## Displaying in the browser coverage of tested code, on the html report (run only during development)
 cover: test
 	GOPATH=${GOPATH} go tool cover -html=$(DIR)/coverage.log
 .PHONY: cover
