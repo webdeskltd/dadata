@@ -286,3 +286,7 @@ type StatResponse struct {
 		Clean       int `json:"clean"`
 	} `json:"services"`
 }
+
+type BalanceResponse struct {
+	Balance float64 `json:"balance"`
+}
