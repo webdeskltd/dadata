@@ -21,8 +21,8 @@ notifications:
     on_failure: always
 
 before_script:
-  - mkdir -p $HOME/gopath/src/gopkg.in/webdeskltd
-  - ln -s ${TRAVIS_BUILD_DIR} $HOME/gopath/src/gopkg.in/webdeskltd/dadata.v2
+  - mkdir -p ${TRAVIS_HOME}/gopath/src/gopkg.in/webdeskltd
+  - ln -s ${TRAVIS_BUILD_DIR} ${TRAVIS_HOME}/gopath/src/gopkg.in/webdeskltd/dadata.v2
 
 script:
   - go install ./...
