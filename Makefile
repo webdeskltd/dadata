@@ -17,6 +17,7 @@ link:
 .PHONY: link
 
 ## Dependence managers
+# Install: go get -u github.com/FiloSottile/gvt
 dep: link
 	@if command -v "gvt"; then GOPATH="$(DIR)" gvt update -all; fi
 .PHONY: dep
@@ -53,6 +54,8 @@ bench: link
 .PHONY: bench
 
 ## Code quality testing
+# https://github.com/alecthomas/gometalinter/
+# install: curl -L https://git.io/vp6lP | sh
 lint:
 	if command -v "gometalinter"; then gometalinter \
 	--vendor \
