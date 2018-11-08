@@ -25,3 +25,12 @@ _testmain.go
 
 # Intellij IDEA and Goland
 .idea
+
+# Of the project ...
+/vendor/vendor
+/bin
+/src
+/pkg
+/run
+/*.lock
+/*.log

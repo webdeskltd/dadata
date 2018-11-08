@@ -1,5 +1,5 @@
-go_import_path: gopkg.in/webdeskltd/dadata.v2
 language: go
+go_import_path: gopkg.in/webdeskltd/dadata.v2
 sudo: false
 
 go:
@@ -20,11 +20,12 @@ notifications:
     on_success: change
     on_failure: always
 
-before_script:
-  - mkdir -p ${TRAVIS_HOME}/gopath/src/gopkg.in/webdeskltd
-  - ln -s ${TRAVIS_BUILD_DIR} ${TRAVIS_HOME}/gopath/src/gopkg.in/webdeskltd/dadata.v2
+install:
+  - go get github.com/mattn/goveralls
+  - go get gopkg.in/webnice/debug.v1
+  - go get gopkg.in/webnice/log.v2
 
 script:
-  - go install ./...
-  - diff -u <(echo -n) <(gofmt -d .)
-  - go test -v ./...
+  - make link
+  - make test
+  - GOPATH=`pwd` $HOME/gopath/bin/goveralls -coverprofile=coverage.log -service=travis-ci -repotoken $COVERALLS_TOKEN
