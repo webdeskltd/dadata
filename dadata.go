@@ -11,10 +11,16 @@ import (
 	"net/http"
 )
 
-const baseURL = "https://dadata.ru/api/v2/"
+const (
+	baseURL        = "https://dadata.ru/api/v2/"
+	baseSuggestURL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/"
+)
 
 // DaData client for DaData.ru (https://dadata.ru/)
 type DaData struct {
+	baseURL        string
+	baseSuggestURL string
+
 	apiKey     string
 	secretKey  string
 	httpClient *http.Client
@@ -32,9 +38,33 @@ func NewDaData(apiKey, secretKey string) *DaData {
 //    daData:= NewDaDataCustomClient(apiKey, secretKey, appEngineClient)
 func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *DaData {
 	return &DaData{
-		apiKey:     apiKey,
-		secretKey:  secretKey,
-		httpClient: httpClient,
+		baseURL:        baseURL,
+		baseSuggestURL: baseSuggestURL,
+		apiKey:         apiKey,
+		secretKey:      secretKey,
+		httpClient:     httpClient,
+	}
+}
+
+// WithCustomBaseURL return clone of daData client with custom baseUrl
+func (daData *DaData) WithCustomBaseURL(url string) *DaData {
+	return &DaData{
+		baseURL:        url,
+		baseSuggestURL: daData.baseSuggestURL,
+		apiKey:         daData.apiKey,
+		secretKey:      daData.secretKey,
+		httpClient:     daData.httpClient,
+	}
+}
+
+// WithCustomSuggestURL return clone of daData client with custom suggestURL
+func (daData *DaData) WithCustomSuggestURL(suggestURL string) *DaData {
+	return &DaData{
+		baseURL:        daData.baseURL,
+		baseSuggestURL: suggestURL,
+		apiKey:         daData.apiKey,
+		secretKey:      daData.secretKey,
+		httpClient:     daData.httpClient,
 	}
 }
 
@@ -83,5 +113,5 @@ func (daData *DaData) sendRequestToURL(ctx context.Context, method, url string, 
 
 // sendRequest
 func (daData *DaData) sendRequest(ctx context.Context, lastURLPart string, source interface{}, result interface{}) error {
-	return daData.sendRequestToURL(ctx, "POST", baseURL+lastURLPart, source, result)
+	return daData.sendRequestToURL(ctx, "POST", daData.baseURL+lastURLPart, source, result)
 }

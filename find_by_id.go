@@ -16,7 +16,7 @@ func (daData *DaData) AddressByID(id string) (*ResponseAddress, error) {
 func (daData *DaData) AddressByIDWithCtx(ctx context.Context, id string) (*ResponseAddress, error) {
 	result := SuggestAddressResponse{}
 	req := SuggestRequestParams{Query: id}
-	if err := daData.sendRequestToURL(ctx, "POST", baseSuggestURL+"findById/address", req, &result); err != nil {
+	if err := daData.sendRequestToURL(ctx, "POST", daData.baseSuggestURL+"findById/address", req, &result); err != nil {
 		return nil, err
 	}
 

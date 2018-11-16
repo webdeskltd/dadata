@@ -5,8 +5,6 @@ import (
 	"fmt"
 )
 
-const baseSuggestURL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/"
-
 // GeoIPResponse response for GeoIP
 type GeoIPResponse struct {
 	Location *ResponseAddress `json:"location"`
@@ -31,7 +29,7 @@ func (daData *DaData) GeoIP(ip string) (*GeoIPResponse, error) {
 func (daData *DaData) GeoIPWithCtx(ctx context.Context, ip string) (*GeoIPResponse, error) {
 	var result GeoIPResponse
 
-	if err := daData.sendRequestToURL(ctx, "GET", baseSuggestURL+"detectAddressByIp?ip="+ip, nil, &result); err != nil {
+	if err := daData.sendRequestToURL(ctx, "GET", daData.baseSuggestURL+"detectAddressByIp?ip="+ip, nil, &result); err != nil {
 		return nil, err
 	}
 	if result.Location == nil {

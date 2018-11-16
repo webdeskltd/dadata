@@ -236,3 +236,25 @@ func ExampleDaData_SuggestAddressesWithCtx() {
 	// Самарская обл, г Сызрань, ул Ленинградская
 	// sendRequestToURL: ctx.Err return err=context canceled
 }
+
+func ExampleDaData_WithCustomBaseURL() {
+	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
+
+	// if you install dadata-box to your own servers, just use WithCustomBaseURL with your box url
+	daData = daData.WithCustomBaseURL("https://dadata.ru/api/v2/")
+	names, err := daData.CleanNames("Алексей Иванов", "Иван Алексеев")
+	if nil != err {
+		fmt.Println(err)
+	}
+
+	for _, name := range names {
+		fmt.Println(name.Surname)
+		fmt.Println(name.Name)
+	}
+
+	// Output:
+	// Иванов
+	// Алексей
+	// Алексеев
+	// Иван
+}

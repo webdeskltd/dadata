@@ -72,12 +72,14 @@ type Address struct {
 	BeltwayDistance      string `json:"beltway_distance"`        // Расстояние от кольцевой в км.
 
 	// QualityCodeGeo для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
-	QualityCodeGeo      interface{} `json:"qc_geo"`         // Код точности координат
-	QualityCodeComplete int         `json:"qc_complete"`    // Код полноты
-	QualityCodeHouse    int         `json:"qc_house"`       // Код проверки дома
-	QualityCode         int         `json:"qc"`             // Код качества
-	UnparsedParts       string      `json:"unparsed_parts"` // Нераспознанная часть адреса. Для адреса
-	Metro               []Metro     `json:"metro"`
+	QualityCodeGeo interface{} `json:"qc_geo"` // Код точности координат
+	// QualityCodeComplete аналогично все поля qc_* возвращаются то как int то как string, в итоге всем проставили interface{}
+	QualityCodeComplete interface{} `json:"qc_complete"` // Код полноты
+	QualityCodeHouse    interface{} `json:"qc_house"`    // Код проверки дома
+	QualityCode         interface{} `json:"qc"`          // Код качества
+
+	UnparsedParts string  `json:"unparsed_parts"` // Нераспознанная часть адреса. Для адреса
+	Metro         []Metro `json:"metro"`
 }
 
 // ResponseAddress api response for address
