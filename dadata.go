@@ -63,7 +63,6 @@ func (daData *DaData) sendRequestToURL(ctx context.Context, method, url string, 
 	request.Header.Add("X-Secret", daData.secretKey)
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("Accept", "application/json")
-	request.Header.Set("Connection", "close")
 
 	response, err := daData.httpClient.Do(request)
 	if err != nil {
