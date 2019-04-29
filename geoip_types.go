@@ -8,3 +8,8 @@ var baseSuggestURL = constBaseSuggestURL
 type GeoIPResponse struct {
 	Location *ResponseAddress `json:"location"`
 }
+
+type GeolocateRequest struct {
+	Lat float32 `json:"lat"`
+	Lon float32 `json:"lon"`
+}
