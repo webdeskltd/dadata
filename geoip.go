@@ -3,6 +3,7 @@ package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 import (
 	"context"
 	"fmt"
+	"net/http"
 )
 
 // GeoIP try to find address by IP
@@ -27,6 +28,21 @@ func (daData *DaData) GeoIPWithCtx(ctx context.Context, ip string) (result *GeoI
 		result = nil
 	} else if result.Location == nil {
 		result, err = nil, fmt.Errorf("dadata.GeoIP: cannot detect address by ip %s", ip)
+	}
+	return
+}
+
+// GeolocateAddress try to find address by coordinates
+func (daData *DaData) GeolocateAddress(req GeolocateRequest) ([]ResponseAddress, error) {
+	return daData.GeolocateAddressWithCtx(context.Background(), req)
+}
+
+// GeolocateAddressWithCtx try to find address by coordinates
+func (daData *DaData) GeolocateAddressWithCtx(ctx context.Context, req GeolocateRequest) (result []ResponseAddress, err error) {
+	if err = daData.sendRequestToURL(ctx, http.MethodPost, baseSuggestURL+"geolocate/address", &req, &result); err != nil {
+		result = nil
+	} else if len(result) == 0 {
+		result, err = nil, fmt.Errorf("dadata.GeolocateAddress: cannot detect addresses by coordinates %+v", req)
 	}
 	return
 }
