@@ -10,6 +10,8 @@ type GeoIPResponse struct {
 }
 
 type GeolocateRequest struct {
-	Lat float32 `json:"lat"`
-	Lon float32 `json:"lon"`
+	Lat          float32 `json:"lat"`
+	Lon          float32 `json:"lon"`
+	Count        int     `json:"count,omitempty"`
+	RadiusMeters int     `json:"radius_meters,omitempty"`
 }
