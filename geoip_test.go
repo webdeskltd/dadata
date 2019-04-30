@@ -3,6 +3,8 @@ package dadata_test
 import (
 	"reflect"
 	"testing"
+
+	. "gopkg.in/webdeskltd/dadata.v2"
 )
 
 func TestDaData_DetectAddressByIP(t *testing.T) {
@@ -33,6 +35,42 @@ func TestDaData_DetectAddressByIP(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got.Location.Data.City, tt.wantCity) {
 				t.Errorf("DaData.GeoIP() = %v, want %v", got.Location.Data.City, tt.wantCity)
+			}
+		})
+	}
+}
+
+func TestDaData_GeolocateAddresses(t *testing.T) {
+	tt := []struct {
+		name       string
+		query      GeolocateRequest
+		wantStreet string
+		wantErr    bool
+	}{
+		{
+			"ГБОУ Школа №2120",
+			GeolocateRequest{55.6010979, 37.3593894},
+			"77000006000003600",
+			false,
+		},
+		{
+			"МФЮА",
+			GeolocateRequest{55.722853, 37.692247},
+			"77000000000001300",
+			false,
+		},
+	}
+	for _, tc := range tt {
+		t.Run(tc.name, func(t *testing.T) {
+			daData := instance()
+			got, err := daData.GeolocateAddress(tc.query)
+			if (err != nil) != tc.wantErr {
+				t.Errorf("DaData.GeolocateAddress() error = %v, wantErr %v", err, tc.wantErr)
+				return
+			}
+			kladr := got[0].Data.StreetKladrID
+			if !reflect.DeepEqual(kladr, tc.wantStreet) {
+				t.Errorf("DaData.GeolocateAddress() = %#v, want %#v", kladr, tc.wantStreet)
 			}
 		})
 	}
