@@ -71,13 +71,21 @@ type Address struct {
 	BeltwayHit           string `json:"beltway_hit"`             // Внутри кольцевой?
 	BeltwayDistance      string `json:"beltway_distance"`        // Расстояние от кольцевой в км.
 
+	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
 	// QualityCodeGeo для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
-	QualityCodeGeo      interface{} `json:"qc_geo"`         // Код точности координат
-	QualityCodeComplete int         `json:"qc_complete"`    // Код полноты
-	QualityCodeHouse    int         `json:"qc_house"`       // Код проверки дома
-	QualityCode         int         `json:"qc"`             // Код качества
-	UnparsedParts       string      `json:"unparsed_parts"` // Нераспознанная часть адреса. Для адреса
-	Metro               []Metro     `json:"metro"`
+	QualityCodeGeo interface{} `json:"qc_geo"` // Код точности координат
+	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
+	// QualityCodeComplete для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
+	QualityCodeComplete interface{} `json:"qc_complete"` // Код полноты
+	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
+	// QualityCodeHouse для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
+	QualityCodeHouse interface{} `json:"qc_house"` // Код проверки дома
+	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
+	// QualityCode для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
+	QualityCode interface{} `json:"qc"` // Код качества
+
+	UnparsedParts string  `json:"unparsed_parts"` // Нераспознанная часть адреса. Для адреса
+	Metro         []Metro `json:"metro"`
 }
 
 // ResponseAddress api response for address
