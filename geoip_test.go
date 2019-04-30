@@ -49,13 +49,13 @@ func TestDaData_GeolocateAddresses(t *testing.T) {
 	}{
 		{
 			"ГБОУ Школа №2120",
-			GeolocateRequest{55.6010979, 37.3593894},
+			GeolocateRequest{Lat: 55.6010979, Lon: 37.3593894},
 			"77000006000003600",
 			false,
 		},
 		{
 			"МФЮА",
-			GeolocateRequest{55.722853, 37.692247},
+			GeolocateRequest{Lat: 55.722853, Lon: 37.692247},
 			"77000000000001300",
 			false,
 		},
