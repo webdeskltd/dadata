@@ -40,10 +40,12 @@ func (daData *DaData) GeolocateAddress(req GeolocateRequest) ([]ResponseAddress,
 // GeolocateAddressWithCtx try to find address by coordinates
 func (daData *DaData) GeolocateAddressWithCtx(ctx context.Context, req GeolocateRequest) (ret []ResponseAddress, err error) {
 	var result = &SuggestAddressResponse{}
-	if err = daData.sendRequestToURL(ctx, http.MethodPost, baseSuggestURL+"geolocate/address", &req, result); err != nil {
-		result = nil
-	} else if len(result.Suggestions) == 0 {
-		result, err = nil, fmt.Errorf("dadata.GeolocateAddress: cannot detect addresses by coordinates %+v", req)
+	err = daData.sendRequestToURL(ctx, http.MethodPost, baseSuggestURL+"geolocate/address", &req, result)
+	if err != nil {
+		return
+	}
+	if len(result.Suggestions) == 0 {
+		return nil, fmt.Errorf("dadata.GeolocateAddress: no addresses found by coordinates %+v", req)
 	}
 	ret = result.Suggestions
 	return
