@@ -65,6 +65,11 @@ type AddressSuggester interface {
 	SuggestAddressesWithCtx(ctx context.Context, requestParams SuggestRequestParams) ([]ResponseAddress, error)
 }
 
+type AddressGeoLocator interface {
+	GeolocateAddress(req GeolocateRequest) ([]ResponseAddress, error)
+	GeolocateAddressWithCtx(ctx context.Context, req GeolocateRequest) ([]ResponseAddress, error)
+}
+
 // NamesSuggester is the interface for suggest Names
 type NamesSuggester interface {
 	SuggestNames(requestParams SuggestRequestParams) ([]ResponseName, error)

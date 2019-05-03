@@ -43,11 +43,11 @@ func (daData *DaData) GeolocateAddressWithCtx(ctx context.Context, req Geolocate
 
 	err = daData.sendRequestToURL(ctx, http.MethodPost, baseSuggestURL+"geolocate/address", &req, result)
 	if err != nil {
-		result = nil
+		ret = nil
 		return
 	}
 	if len(result.Suggestions) == 0 {
-		result, err = nil, fmt.Errorf("dadata.GeolocateAddress: cannot detect addresses by coordinates %+v", req)
+		ret, err = nil, fmt.Errorf("dadata.GeolocateAddress: cannot detect addresses by coordinates %+v", req)
 		return
 	}
 	ret = result.Suggestions
