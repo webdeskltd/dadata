@@ -8,6 +8,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -40,46 +41,55 @@ func NewDaDataCustomClient(apiKey, secretKey string, httpClient *http.Client) *D
 	}
 }
 
-func (daData *DaData) sendRequestToURL(ctx context.Context, method, url string, source interface{}, result interface{}) error {
-	if err := ctx.Err(); err != nil {
-		return fmt.Errorf("sendRequestToURL: ctx.Err return err=%v", err)
+func (daData *DaData) sendRequestToURL(ctx context.Context, method, url string, source interface{}, result interface{}) (err error) {
+	var buffer *bytes.Buffer
+	var request *http.Request
+	var response *http.Response
+	var buf *bytes.Buffer
+
+	if err = ctx.Err(); err != nil {
+		err = fmt.Errorf("sendRequestToURL: ctx.Err return error: %s", err)
+		return
 	}
-
-	buffer := &bytes.Buffer{}
-
-	if err := json.NewEncoder(buffer).Encode(source); err != nil {
-		return fmt.Errorf("sendRequestToURL: json.Encode return err = %v", err)
+	buffer = &bytes.Buffer{}
+	if err = json.NewEncoder(buffer).Encode(source); err != nil {
+		err = fmt.Errorf("sendRequestToURL: json.Encode return error: %s", err)
+		return
 	}
-
-	request, err := http.NewRequest(method, url, buffer)
-
+	request, err = http.NewRequest(method, url, buffer)
 	if err != nil {
-		return fmt.Errorf("sendRequestToURL: http.NewRequest return err = %v", err)
+		err = fmt.Errorf("sendRequestToURL: http.NewRequest return error: %s", err)
+		return
 	}
-
 	request = request.WithContext(ctx)
-
 	request.Header.Add("Authorization", fmt.Sprintf("Token %s", daData.apiKey))
 	request.Header.Add("X-Secret", daData.secretKey)
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("Accept", "application/json")
-
-	response, err := daData.httpClient.Do(request)
+	response, err = daData.httpClient.Do(request)
 	if err != nil {
-		return fmt.Errorf("sendRequestToURL: httpClient.Do return err = %v", err)
+		err = fmt.Errorf("sendRequestToURL: httpClient.Do return error: %s", err)
+		return
 	}
-
-	defer response.Body.Close()
+	defer func() { _ = response.Body.Close() }()
 
 	if http.StatusOK != response.StatusCode {
-		return fmt.Errorf("sendRequestToURL: Request error %v", response.Status)
+		err = fmt.Errorf("sendRequestToURL: Request error: %s", response.Status)
+		return
+	}
+	buf = &bytes.Buffer{}
+	if _, err = io.Copy(buf, response.Body); err != nil {
+		err = fmt.Errorf("sendRequestToURL: reading response body error: %s", err)
+		return
+	}
+	if err = json.Unmarshal(buf.Bytes(), &result); err != nil {
+		err = fmt.Errorf("sendRequestToURL: json.Decode return error: %s\nServer return:\n%s",
+			err, buf.String(),
+		)
+		return
 	}
 
-	if err := json.NewDecoder(response.Body).Decode(&result); err != nil {
-		return fmt.Errorf("sendRequestToURL: json.Decode return err = %v", err)
-	}
-
-	return nil
+	return
 }
 
 // sendRequest

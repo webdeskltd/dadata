@@ -2,6 +2,7 @@ PRODUCT=dadata.v2
 REPNAME=gopkg.in/webdeskltd
 DIR=$(strip $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
 
+OLDGOPATH := $(GOPATH)
 GOPATH := $(DIR):$(GOPATH)
 DATE=$(shell date -u +%Y%m%d.%H%M%S.%Z)
 GOGENERATE=$(shell if [ -f .gogenerate ]; then cat .gogenerate; fi)
@@ -17,9 +18,11 @@ link:
 .PHONY: link
 
 ## Dependency manager
-# Install: go get -u github.com/FiloSottile/gvt
 dep: link
-	@if command -v "gvt"; then GOPATH="$(DIR)" gvt update -all; fi
+	@if [ ! -f "${DIR}/go.mod" ]; then GO111MODULE="on" GOPATH="$(OLDGOPATH)" go mod init "${REPNAME}/${PRODUCT}"; fi
+	@GO111MODULE="on" GOPATH="$(OLDGOPATH)" go mod download
+	@GO111MODULE="on" GOPATH="$(OLDGOPATH)" go get
+	@GO111MODULE="on" GOPATH="$(OLDGOPATH)" go mod vendor
 .PHONY: dep
 
 ## Code generation (run only during development)

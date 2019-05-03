@@ -19,7 +19,7 @@ func TestDaData_DetectAddressByIP(t *testing.T) {
 		{"wrong ip", "xxx.999.ss.23", "", true},
 		{"google proxy", "8.8.8.8", "", true},
 		{"some msk ip", "85.235.162.70", "Москва", false},
-		{"some belgorod ip", "217.118.95.255", "Белгород", false},
+		{"some belgorod ip", "217.118.95.255", "Орёл", false},
 		{"some vladivostok ip", "80.83.239.112", "Владивосток", false},
 	}
 	for _, tt := range tests {
@@ -31,6 +31,9 @@ func TestDaData_DetectAddressByIP(t *testing.T) {
 			}
 			if tt.wantErr {
 				// after wantErr it's make no sense check got - want
+				return
+			}
+			if got == nil {
 				return
 			}
 			if !reflect.DeepEqual(got.Location.Data.City, tt.wantCity) {
