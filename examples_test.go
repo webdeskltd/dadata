@@ -238,3 +238,24 @@ func ExampleDaData_SuggestAddressesWithCtx() {
 	// Самарская обл, г Сызрань, ул Ленинградская
 	// sendRequestToURL: ctx.Err return error: context canceled
 }
+
+func ExampleDaData_SuggestParty_LiquidatedOrg() {
+	daData := NewDaData(os.Getenv("API_KEY"), os.Getenv("SECRET_KEY"))
+
+	query := "6673088514"
+
+	parties, err := daData.SuggestParties(SuggestRequestParams{Query: query, Count: 1})
+	if nil != err {
+		fmt.Println(err)
+	}
+
+	for i := range parties {
+		party := parties[i]
+		fmt.Println(party.Data.Name.Full)
+		fmt.Println(party.Data.State.LiquidationDate)
+	}
+
+	// Output:
+	// АПТЕКА АНГАРА
+	// 1579219200000
+}
