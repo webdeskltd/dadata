@@ -1,5 +1,7 @@
 package dadata // import "gopkg.in/webdeskltd/dadata.v2"
 
+import "encoding/json"
+
 // Address base struct for datdata.Address
 type Address struct {
 	Source               string `json:"source"`                  // Исходный адрес одной строкой
@@ -71,18 +73,10 @@ type Address struct {
 	BeltwayHit           string `json:"beltway_hit"`             // Внутри кольцевой?
 	BeltwayDistance      string `json:"beltway_distance"`        // Расстояние от кольцевой в км.
 
-	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
-	// QualityCodeGeo для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
-	QualityCodeGeo interface{} `json:"qc_geo"` // Код точности координат
-	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
-	// QualityCodeComplete для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
-	QualityCodeComplete interface{} `json:"qc_complete"` // Код полноты
-	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
-	// QualityCodeHouse для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
-	QualityCodeHouse interface{} `json:"qc_house"` // Код проверки дома
-	// TODO: Переделать на собственный тип с кастомный unmarshaller поинмающий как string так и int типы
-	// QualityCode для clean вызовов он int для suggest в адресе банков он string поэтому в поле поставил interface{} чтобы работало и там и там)\
-	QualityCode interface{} `json:"qc"` // Код качества
+	QualityCodeGeo      json.Number `json:"qc_geo"`      // Код точности координат
+	QualityCodeComplete json.Number `json:"qc_complete"` // Код полноты
+	QualityCodeHouse    json.Number `json:"qc_house"`    // Код проверки дома
+	QualityCode         json.Number `json:"qc"`          // Код качества
 
 	UnparsedParts string  `json:"unparsed_parts"` // Нераспознанная часть адреса. Для адреса
 	Metro         []Metro `json:"metro"`
@@ -129,7 +123,7 @@ type Name struct {
 	Name           string      `json:"name"`            // Имя
 	Patronymic     string      `json:"patronymic"`      // Отчество
 	Gender         string      `json:"gender"`          // Пол
-	QualityCode    interface{} `json:"qc"`              // Код качества
+	QualityCode    json.Number `json:"qc"`              // Код качества
 }
 
 // ResponseName api response for name
